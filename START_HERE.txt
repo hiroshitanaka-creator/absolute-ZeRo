@@ -1,0 +1,29 @@
+Absolute Zero 1.0.0
+
+パソコンですぐ遊ぶ：
+  Absolute-Zero-standalone.html をブラウザで開いてください。
+  HTML内にコードと見た目をまとめた、自己完結版です。
+
+iPhoneで遊ぶ：
+  ZIPやHTMLのファイルプレビューではなく、GitHub Pages等へ公開したURLを
+  Safariで開いてください。公開後は「共有 → ホーム画面に追加」に対応します。
+  プレイ用URL: https://hiroshitanaka-creator.github.io/absolute-ZeRo/
+  初回公開はREADMEのPages設定手順を参照してください。
+
+最初の操作：
+  駒をタップ → 枠が付いた着地先をタップ。
+  数字と同じ距離だけ上下左右へ跳びます。
+  同じ数字が重なると消え、違う数字なら差が残ります。
+  すべて消せばクリア。
+
+最初の4面はルール体験用です。右上の盤面サイズのボタンで
+  60面の好きな問題へ進めます。
+
+困ったら：
+  1手戻す／やり直す／ヒント／最初から を使ってください。
+  ヒントは、全消しの経路を検証できた手だけを表示します。
+
+公開・開発：README.md
+仕様と制約：docs/DESIGN.md
+検証済み／未確認の範囲：docs/TEST_REPORT.md
+ライセンス：LICENSE（MIT）

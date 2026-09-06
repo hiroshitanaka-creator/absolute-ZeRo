@@ -1,0 +1,760 @@
+<!doctype html>
+<!--
+MIT License
+
+Copyright (c) 2026 Absolute Zero contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-->
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#183c32">
+  <meta name="description" content="数字の距離だけ跳び、差でほどく。すべての駒を消す、静かな思考パズル。60の航路・デイリー・自由演習。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Absolute Zero">
+  <title>Absolute Zero — 引いて、ゼロになる。</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22110%22%20fill%3D%22%23183c32%22%2F%3E%3Crect%20x%3D%2288%22%20y%3D%2288%22%20width%3D%22336%22%20height%3D%22336%22%20rx%3D%2264%22%20fill%3D%22%23d3ef82%22%2F%3E%3Cellipse%20cx%3D%22256%22%20cy%3D%22256%22%20rx%3D%2272%22%20ry%3D%22113%22%20fill%3D%22none%22%20stroke%3D%22%23183c32%22%20stroke-width%3D%2222%22%2F%3E%3Cpath%20d%3D%22m163%20361%20186-210%22%20stroke%3D%22%23183c32%22%20stroke-width%3D%2220%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E%0A">
+  
+  
+  <style>/* Original CSS artwork; no external fonts or assets. MIT. */
+:root{color-scheme:light;--paper:#f3f2eb;--ink:#203a31;--muted:#66746b;--line:#d9ded1;--soft:#e8ebdf;--panel:#fafbf5;--accent:#d3ef82;--accent-ink:#213628;--board:#183c32;--slot:#28493e;--slot-edge:#416050;--tile:#e2eddb;--tile-text:#183c32;--warning:#aa4d2a;--shadow:0 24px 55px -26px #1b342966;--sans:"Avenir Next",Avenir,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;--mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box}html{min-width:320px;scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}button,a,input{ -webkit-tap-highlight-color:transparent}button,input,textarea{font:inherit}button{cursor:pointer;color:inherit}button{border:0}button:disabled{cursor:default;opacity:.35}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #b26b18;outline-offset:4px}button:focus:not(:focus-visible){outline:none}button:not(:disabled):active{transform:translateY(1px)}[hidden]{display:none!important}.svg-library{position:absolute;width:0;height:0;overflow:hidden}.icon{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.site-shell{max-width:1240px;margin:auto;padding:0 52px;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}.site-header{height:105px;display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line)}.wordmark{display:flex;gap:12px;align-items:center;color:var(--ink);text-decoration:none;font-weight:800;font-size:15px;letter-spacing:1.6px;line-height:1.35;white-space:nowrap}.wordmark small{display:block;font:8px var(--mono);letter-spacing:2.4px;margin-top:5px}.logo-box{background:var(--ink);color:var(--paper);display:grid;place-items:center;width:42px;height:42px;border-radius:50%}.logo-box .icon{width:29px;height:29px;stroke-width:1.25}.header-right{display:flex;align-items:center;gap:8px}.edition{font:9px var(--mono);letter-spacing:1.3px;margin-right:26px;color:var(--muted)}.icon-button{height:44px;width:44px;display:inline-grid;place-items:center;border-radius:50%;background:transparent}.icon-button:hover{background:var(--soft)}.main-layout{display:grid;grid-template-columns:minmax(270px,1fr) minmax(390px,530px);gap:70px;padding:44px 0 48px;align-items:start}.intro{padding-top:28px}.eyebrow{font:10px var(--mono);letter-spacing:1.7px;font-weight:500;display:flex;align-items:center;gap:9px}.live-dot{width:6px;height:6px;background:var(--ink);border-radius:50%;display:inline-block}.intro h1{font-size:clamp(40px,4vw,58px);font-weight:650;line-height:1.45;letter-spacing:-2px;margin:30px 0 19px}.intro h1 span{color:#738168}.intro-copy{font-size:14px;color:var(--muted);line-height:2.05;letter-spacing:.6px}.formula-art{margin:34px 0 44px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;max-width:280px}.formula-tile{display:grid;place-items:center;width:54px;height:56px;font:25px var(--mono);border:1px solid #c4cdb9;border-radius:11px;background:var(--panel)}.formula-tile.result{background:var(--accent);border-color:var(--accent)}.formula-sign{font:18px var(--mono);color:var(--muted)}.formula-art small{width:100%;margin-top:0;font:8px var(--mono);letter-spacing:1px;color:var(--muted)}.journey-summary{max-width:292px}.summary-heading{display:flex;justify-content:space-between;align-items:center;font:9px var(--mono);letter-spacing:1.5px}.progress-track{height:3px;margin:13px 0;background:var(--line);overflow:hidden}.progress-track span{display:block;height:100%;background:var(--ink);width:0;transition:width .4s}.journey-summary p{font-size:11px;color:var(--muted)}.intro-foot{font:8px/1.9 var(--mono);letter-spacing:1.4px;color:var(--muted);margin-top:33px}.game-console{min-width:0}.mode-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--soft);padding:5px;gap:4px;border-radius:13px;margin-bottom:23px}.mode-tab{border-radius:9px;min-height:43px;padding:8px 3px;background:transparent;color:var(--muted);font-size:12px;font-weight:650;transition:background .2s,color .2s}.mode-tab.active{background:var(--ink);color:var(--paper);box-shadow:0 3px 8px #0c251415}.mode-tab small{font:10px var(--mono);margin-left:5px;opacity:.7}.tiny-dot{display:inline-block;width:5px;height:5px;background:currentColor;border-radius:50%;vertical-align:middle;margin-left:5px}.puzzle-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:17px}.puzzle-heading .eyebrow{font-size:9px;color:var(--muted);letter-spacing:1.2px}.puzzle-heading h2{font-size:19px;letter-spacing:.3px;font-weight:650;margin:7px 0 0;line-height:1.45}.level-button{display:flex;align-items:center;justify-content:center;gap:6px;min-width:72px;min-height:44px;border:1px solid var(--line);background:transparent;border-radius:9px;font:10px var(--mono);flex-shrink:0}.level-button .icon{width:14px;height:14px}.level-button:hover{background:var(--soft)}.board-frame{padding:18px 18px 12px;background:var(--board);color:#deebd7;border-radius:20px;box-shadow:var(--shadow);position:relative;isolation:isolate}.board-hud{display:flex;justify-content:space-between;align-items:center;padding:0 5px 15px;min-height:40px}.hud-item{font-size:10px;color:#b0c6b6;display:flex;align-items:baseline;gap:8px}.hud-item strong{font:23px var(--mono);color:#eef6e3;font-weight:400}.hud-unit{font-size:9px}.board-phase{font:8px var(--mono);letter-spacing:2px;color:#95ad99}.board{position:relative;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:8px;aspect-ratio:1;touch-action:none;-webkit-user-select:none;user-select:none}.cell{min-width:0;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;background:var(--slot);border:1px solid var(--slot-edge);border-radius:10px;padding:0;color:#6d8c75;aspect-ratio:1;touch-action:none;transition:background .14s,border-color .14s,box-shadow .14s}.cell.empty{cursor:default;background:linear-gradient(135deg,#ffffff02,#ffffff00),var(--slot);border-color:#47665199}.cell.empty:before{content:"";width:3px;height:3px;border-radius:50%;background:#70906c4d}.cell.tile{background:var(--tile);color:var(--tile-text);border:1px solid #f4f9e6;box-shadow:0 3px 0 #061f1a38;cursor:pointer}.cell.tile[data-value="1"]{--tile:#edf3dc}.cell.tile[data-value="2"]{--tile:#dcebd5}.cell.tile[data-value="3"]{--tile:#c6dfc6}.cell.tile[data-value="4"]{--tile:#f3e8bc}.cell.tile[data-value="5"]{--tile:#ebd7ac}.cell.tile[data-value="6"]{--tile:#dfc7ab}.cell.tile[data-value="7"],.cell.tile[data-value="8"],.cell.tile[data-value="9"]{--tile:#d4d9cf}.tile-value{font:clamp(22px,3vw,33px) var(--mono);font-weight:500;letter-spacing:-1px;position:relative;top:-1px}.tile-mark{position:absolute;bottom:3px;left:0;right:0;text-align:center;font:7px var(--mono);letter-spacing:2px;line-height:1;opacity:.65;pointer-events:none}.cell.anchored .tile-mark{font:7px var(--sans);letter-spacing:.3px;opacity:.7}.cell.selected{z-index:3;background:var(--accent);box-shadow:0 0 0 3px #d3ef82,0 0 0 6px #183c32;border-color:var(--accent)}.cell.landing{box-shadow:inset 0 0 0 2px #6d8b34,0 0 0 1px #e2fbb5;border-color:#d3ef82;z-index:2}.cell.landing::after{content:attr(data-result);position:absolute;top:-5px;right:-5px;min-width:22px;height:22px;padding:0 4px;border-radius:20px;background:var(--accent);color:#17372a;display:grid;place-items:center;font:11px var(--mono);border:2px solid var(--board);font-weight:700}.cell.hint-source{animation:hint-ring 1.3s ease-in-out infinite;box-shadow:0 0 0 3px #d3ef82;background:var(--accent)}.cell.hint-target{outline:2px dashed #d3ef82;outline-offset:2px;z-index:3}.cell.last-destination:not(.empty){animation:tile-born .28s ease-out}.cell.flight-path{background:#395743}.cell:focus-visible{outline:3px solid #fff1af;outline-offset:2px;z-index:4}.board[aria-busy="true"]{pointer-events:none}.board-footer{display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding:0 4px;font-size:9px;color:#b2c6b3;gap:8px}.board-footer>span:first-child{display:flex;align-items:center;gap:7px}.board-led{width:4px;height:4px;background:#c8e784;border-radius:50%;flex-shrink:0}#board-number{font:9px var(--mono);letter-spacing:1px;opacity:.7}.selection-info{display:flex;gap:9px;align-items:center;min-height:55px;padding:11px 3px;font-size:11px;color:var(--muted);line-height:1.6}.selection-info .icon{width:16px;height:16px;color:var(--ink)}.selection-info strong{color:var(--ink)}.game-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.action-button{display:flex;min-height:62px;align-items:center;justify-content:center;flex-direction:column;gap:5px;background:var(--soft);border:1px solid transparent;border-radius:10px;font-size:10px;white-space:nowrap}.action-button .icon{width:19px;height:19px}.action-button:not(:disabled):hover{background:var(--panel);border-color:var(--line)}.action-button.hint-button{background:var(--accent);color:var(--accent-ink)}.field-note{display:flex;align-items:flex-start;gap:14px;border-top:1px solid var(--line);padding-top:17px;margin-top:21px}.note-label{font:8px var(--mono);letter-spacing:1.4px;white-space:nowrap;line-height:2.2;color:var(--muted)}.field-note p{margin:0;font-size:11px;line-height:1.85;color:var(--muted)}.console-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:13px}.text-button{display:inline-flex;gap:5px;align-items:center;background:transparent;padding:10px 0;font-size:10px;color:var(--muted);min-height:36px}.text-button:hover{color:var(--ink);text-decoration:underline}.text-button .icon{width:14px;height:14px}#save-status{font-size:8px;color:var(--muted)}.site-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:18px 0;font:8px var(--mono);letter-spacing:1px;color:var(--muted)}.site-footer .text-button{font:8px var(--mono);letter-spacing:1px}.footer-cross{margin:0 10px;color:#a1ac98}.status-panel{background:var(--soft);border:1px solid var(--line);border-left:3px solid var(--ink);padding:12px 14px;margin:0 0 14px;border-radius:8px;font-size:12px;line-height:1.7}.status-panel p{margin:0 0 7px}.status-panel button{margin-top:4px}.status-panel.warning{border-left-color:var(--warning)}.status-panel.success{background:var(--accent);color:var(--accent-ink)}.status-panel.hint-panel{border-left-color:#90a94b}.small-button{padding:9px 13px;min-height:40px;background:var(--ink);color:var(--paper);border-radius:7px;font-size:11px}.ghost-tile{position:fixed;z-index:50;display:grid;place-items:center;pointer-events:none;border-radius:10px;background:var(--accent);color:#17372a;font:30px var(--mono);box-shadow:0 6px 18px #071b2c44;transition:transform .18s cubic-bezier(.2,.8,.3,1),opacity .18s}.spark{position:fixed;width:6px;height:6px;border-radius:50%;background:#d3ef82;pointer-events:none;z-index:51;animation:spark-out .5s ease-out forwards;--dx:0px;--dy:0px}.board-clear .empty{animation:clear-wave .7s ease both;animation-delay:calc(var(--i) * 10ms)}@keyframes hint-ring{50%{box-shadow:0 0 0 4px #d3ef8270}}@keyframes tile-born{0%{transform:scale(.78)}65%{transform:scale(1.06)}100%{transform:scale(1)}}@keyframes spark-out{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}@keyframes clear-wave{45%{background:#537649;border-color:#86a969}100%{background:var(--slot)}}@keyframes toast-in{from{transform:translate(-50%,12px);opacity:0}to{transform:translate(-50%,0);opacity:1}}dialog{position:fixed;border:1px solid var(--line);padding:24px 28px 28px;background:var(--paper);color:var(--ink);width:min(560px,calc(100vw - 26px));max-height:min(90dvh,850px);border-radius:21px;box-shadow:0 30px 100px #05191055;overscroll-behavior:contain}dialog::backdrop{background:#0b211faa;backdrop-filter:blur(4px)}.dialog-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.dialog-top .eyebrow{font-size:8px;letter-spacing:2px;color:var(--muted)}dialog h2{font-size:24px;letter-spacing:-.5px;line-height:1.5;margin:0 0 16px}dialog p{font-size:13px;line-height:1.95;color:var(--muted)}.dialog-intro{margin-top:-5px}.primary-button{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--ink);color:var(--paper);border-radius:10px;min-height:48px;padding:12px 19px;width:100%;font-size:13px;font-weight:600}.primary-button:hover{filter:brightness(1.14)}.secondary-button{background:var(--soft);color:var(--ink);border:1px solid var(--line)}.dialog-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.dialog-buttons.single{grid-template-columns:1fr}.rule-row{display:grid;grid-template-columns:30px 1fr;gap:13px;margin:19px 0}.rule-number{font:11px var(--mono);color:var(--muted);padding-top:4px}.rule-row h3{margin:0;font-size:14px}.rule-row p{margin:5px 0 0;font-size:12px;line-height:1.8}.rule-formula{background:var(--soft);border-radius:9px;padding:16px;text-align:center;font:20px var(--mono);margin:15px 0}.rule-formula small{display:block;font:10px var(--sans);margin-top:8px;color:var(--muted)}.chapter-block{margin:24px 0}.chapter-block:first-child{margin-top:10px}.chapter-title{font-size:12px;display:flex;justify-content:space-between;margin-bottom:10px}.chapter-title small{font:8px var(--mono);letter-spacing:1px;color:var(--muted)}.level-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.level-choice{min-height:59px;border:1px solid var(--line);border-radius:8px;background:var(--panel);font:16px var(--mono);position:relative}.level-choice.current{border:2px solid var(--ink)}.level-choice.cleared{background:var(--accent);color:var(--accent-ink);border-color:#c2d797}.level-choice small{display:block;font-size:8px;letter-spacing:2px;margin-top:4px}.mode-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.option-button{padding:16px 5px;background:var(--soft);border:1px solid var(--line);border-radius:10px;min-height:80px}.option-button strong{font:21px var(--mono);display:block}.option-button span{display:block;font-size:11px;margin-top:6px}.option-button small{display:block;font-size:9px;margin-top:5px;color:var(--muted)}.option-button.selected{background:var(--accent);border-color:#a8c768;color:var(--accent-ink)}.code-input{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:12px;width:100%;font:16px var(--mono);min-height:48px}.input-label{display:block;margin:23px 0 8px;font-size:12px}.dialog-divider{height:1px;background:var(--line);margin:25px 0}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:18px 0;font-size:13px}.setting-row small{display:block;font-size:10px;color:var(--muted);margin-top:3px}.switch{appearance:none;-webkit-appearance:none;width:44px;height:26px;background:#bac6b7;border-radius:30px;position:relative;cursor:pointer;flex-shrink:0;margin:0}.switch:checked{background:#668937}.switch:before{content:"";position:absolute;left:4px;top:4px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .15s}.switch:checked:before{transform:translateX(18px)}.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;background:var(--soft);padding:17px;border-radius:10px}.stat{text-align:center}.stat strong{font:25px var(--mono);display:block}.stat span{font-size:9px;color:var(--muted)}.settings-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}.settings-links .small-button{background:var(--soft);color:var(--ink);border:1px solid var(--line);min-height:46px}.danger-link{font-size:11px;color:var(--warning);background:transparent;min-height:44px;margin-top:12px}.win-zero{font:85px/1 var(--mono);font-weight:300;color:var(--ink);text-align:center;margin:8px auto 12px;width:110px;position:relative}.win-zero::after{content:"";position:absolute;top:48%;left:10%;height:2px;width:80%;background:var(--ink);transform:rotate(-42deg)}.win-heading{text-align:center}.win-heading p{margin:5px 0;font-size:12px}.win-stars{text-align:center;font:22px var(--mono);letter-spacing:10px;margin:18px 0;color:#697f27}.award-list{font-size:11px;line-height:2.3;color:var(--muted);display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;margin-top:12px}.award-list .earned{color:var(--ink)}.share-area{width:100%;min-height:140px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:13px;border-radius:10px;resize:vertical;font-size:13px;line-height:1.8}.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:200;max-width:min(500px,calc(100vw - 30px));padding:11px 17px;border-radius:10px;background:var(--ink);color:var(--paper);box-shadow:0 6px 35px #00180025;font-size:12px;line-height:1.7;pointer-events:none;display:none}.toast.visible{display:block;animation:toast-in .18s ease-out}body.dark{color-scheme:dark;--paper:#14211d;--ink:#e5efda;--muted:#a9baa7;--line:#35483c;--soft:#26392e;--panel:#203328;--accent:#d3ef82;--accent-ink:#213628;--board:#0b1915;--slot:#21352b;--slot-edge:#425545;--warning:#f6b884;--shadow:0 22px 45px -25px #000b}.dark .intro h1 span{color:#adc789}.dark .formula-tile.result{color:#203a31}.dark .primary-button{background:var(--accent);color:#203a31}.dark .secondary-button{background:var(--soft);color:var(--ink)}.dark .small-button{background:var(--accent);color:#203a31}.dark .option-button.selected{color:#203a31}.dark .cell.landing::after{border-color:var(--board)}.dark .win-stars{color:var(--accent)}.dark .cell.selected{box-shadow:0 0 0 3px #d3ef82,0 0 0 6px #0b1915}
+@media(min-width:1400px){.site-shell{max-width:1310px}.main-layout{gap:100px;grid-template-columns:1fr 550px;padding-top:50px}.intro h1{font-size:62px}.intro{padding-top:40px}.intro-copy{font-size:15px}.formula-art{margin-top:40px}.board{gap:9px}}
+@media(max-width:1040px){.site-shell{padding-left:30px;padding-right:30px}.main-layout{gap:35px;grid-template-columns:minmax(240px,1fr) minmax(370px,1.4fr)}.edition{display:none}.intro h1{font-size:43px}.formula-art{gap:10px}.formula-tile{width:48px;height:50px}}
+@media(max-width:760px){.site-shell{max-width:560px;padding-left:20px;padding-right:20px}.site-header{height:82px}.wordmark{font-size:13px;letter-spacing:1.2px;gap:10px}.wordmark small{font-size:7px;letter-spacing:1.7px}.logo-box{width:35px;height:35px}.logo-box .icon{width:25px;height:25px}.header-right{gap:0}.icon-button{width:42px;height:44px}.main-layout{display:block;padding-top:22px;padding-bottom:21px}.intro{display:none}.mode-tabs{margin-bottom:19px}.puzzle-heading{margin-bottom:15px}.puzzle-heading h2{font-size:18px}.board-frame{padding:15px 14px 11px;border-radius:17px}.board{gap:7px}.board-hud{padding-bottom:12px;min-height:34px}.hud-item strong{font-size:22px}.board-phase{font-size:7px;letter-spacing:1.4px}.board-footer{margin-top:12px;font-size:8px}.cell{border-radius:8px}.tile-value{font-size:29px}.cell[data-size="7"] .tile-value{font-size:24px}.cell[data-size="7"] .tile-mark{font-size:6px;bottom:2px}.selection-info{font-size:11px;min-height:53px}.game-actions{gap:7px}.action-button{min-height:58px}.field-note{margin-top:18px;padding-top:15px;gap:10px}.field-note p{font-size:10px}.note-label{font-size:7px}.site-footer{font-size:7px;padding:12px 0;letter-spacing:.3px}.site-footer>span:nth-child(2){display:none}.site-footer .text-button{font-size:7px;min-height:36px}.console-bottom{margin-top:8px}dialog{padding:20px 22px 25px}.cell.landing::after{font-size:10px;min-width:19px;height:19px;top:-4px;right:-4px}}
+@media(max-width:374px){.site-shell{padding-left:13px;padding-right:13px}.site-header{height:74px}.wordmark{font-size:11px;gap:7px;letter-spacing:1px}.wordmark small{font-size:6px}.logo-box{width:31px;height:31px}.main-layout{padding-top:16px}.mode-tabs{margin-bottom:14px}.mode-tab{font-size:11px;min-height:40px}.puzzle-heading h2{font-size:16px}.board-frame{padding:12px 11px 10px}.board{gap:5px}.tile-value{font-size:26px}.cell[data-size="7"] .tile-value{font-size:21px}.tile-mark{font-size:6px;bottom:2px}.board-phase{font-size:6px;letter-spacing:1px}.hud-item{font-size:9px}.selection-info{font-size:10px;min-height:52px}.level-button{min-width:64px}.field-note{display:block}.note-label{display:block;margin-bottom:3px}.cell{border-radius:6px}.cell[data-size="7"]{border-radius:5px}.game-actions{gap:5px}.action-button{font-size:9px}.board-footer{font-size:7px}.console-bottom .text-button{font-size:9px}#save-status{font-size:7px}}
+@media(max-height:700px) and (max-width:760px){.site-header{height:69px}.main-layout{padding-top:15px}.mode-tabs{margin-bottom:14px}.puzzle-heading{margin-bottom:12px}.puzzle-heading h2{font-size:16px}.field-note{margin-top:14px}.selection-info{min-height:48px}.board-hud{padding-bottom:9px}.board-footer{margin-top:9px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}body.no-motion *,body.no-motion *:before,body.no-motion *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+</style>
+
+</head>
+<body>
+  <svg class="svg-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-zero" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="6.5" ry="9"/><path d="m4 20 16-16"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 16.5v.2"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="m8 5-5 5 5 5M3 10h10a6 6 0 0 1 0 12" transform="translate(0 -2)"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="m16 5 5 5-5 5M21 10H11a6 6 0 0 0 0 12" transform="translate(0 -2)"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M8.5 15c0-2-3-3-3-6.5a6.5 6.5 0 0 1 13 0c0 3.5-3 4.5-3 6.5H8.5Z"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 0 6M4 3v6h6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V3m-4 4 4-4 4 4M5 12v8h14v-8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  </svg>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="wordmark" href="#" id="brand" aria-label="Absolute Zero ホーム">
+        <span class="logo-box"><svg class="icon"><use href="#i-zero"/></svg></span>
+        <span>ABSOLUTE<span class="wordmark-zero"> ZERO</span><small>A SUBTRACTION PUZZLE</small></span>
+      </a>
+      <div class="header-right"><span class="edition">NO. 001 / ZERO IS EVERYTHING</span>
+        <button class="icon-button" id="help" title="遊び方" aria-label="遊び方"><svg class="icon"><use href="#i-help"/></svg></button>
+        <button class="icon-button" id="settings" title="設定と記録" aria-label="設定と記録"><svg class="icon"><use href="#i-settings"/></svg></button>
+      </div>
+    </header>
+    <main class="main-layout">
+      <aside class="intro">
+        <div class="eyebrow"><span class="live-dot"></span> LESS IS THE ANSWER</div>
+        <h1>引いて、<br>ほどいて、<br><span>ゼロになる。</span></h1>
+        <p class="intro-copy">数字の距離だけ、跳ぶ。<br>重ねた差が、次の一手になる。<br>最後に残すのは、何もない盤面。</p>
+        <div class="formula-art" aria-label="5と2の差は3、同じ3同士の差は0">
+          <span class="formula-tile">5</span><span class="formula-sign">−</span><span class="formula-tile">2</span><span class="formula-sign">→</span><span class="formula-tile result">3</span>
+          <small>THE DIFFERENCE MAKES A MOVE.</small>
+        </div>
+        <div class="journey-summary">
+          <div class="summary-heading"><span>YOUR JOURNEY</span><span id="progress-text">0 / 60</span></div>
+          <div class="progress-track"><span id="progress-bar"></span></div>
+          <p id="journey-note">急がなくていい。ひとつずつ、無へ。</p>
+        </div>
+        <p class="intro-foot">NO ADS. NO TIMER PRESSURE.<br>JUST YOU, NUMBERS & A LITTLE SPACE.</p>
+      </aside>
+      <section class="game-console" aria-label="Absolute Zero ゲーム">
+        <nav class="mode-tabs" aria-label="ゲームモード">
+          <button data-mode="journey" class="mode-tab active" aria-pressed="true">航路 <small>60</small></button>
+          <button data-mode="daily" class="mode-tab" aria-pressed="false">デイリー <span class="tiny-dot"></span></button>
+          <button data-mode="free" class="mode-tab" aria-pressed="false">自由演習 <small>∞</small></button>
+        </nav>
+        <div class="puzzle-heading">
+          <div><div id="puzzle-label" class="eyebrow">航路 01 / 60</div><h2 id="puzzle-title">同じ数字を、重ねる</h2></div>
+          <button id="choose-puzzle" class="level-button" title="問題を選ぶ" aria-label="問題を選ぶ"><svg class="icon"><use href="#i-grid"/></svg><span id="board-size">5 × 5</span></button>
+        </div>
+        <div class="board-frame">
+          <div class="board-hud"><span class="hud-item">残り <strong id="remaining">2</strong><span class="hud-unit">枚</span></span><span id="board-phase" class="board-phase">MAKE IT ZERO</span><span class="hud-item">手数 <strong id="move-count">0</strong></span></div>
+          <div id="board" class="board" role="group" aria-label="5行5列の盤面" style="--n:5"></div>
+          <div class="board-footer"><span><span class="board-led"></span><span id="board-footer-text">数字と同じ距離だけ、上下左右へ</span></span><span id="board-number">01</span></div>
+        </div>
+        <div id="selection-info" class="selection-info" role="status" aria-live="polite"><svg class="icon"><use href="#i-arrow"/></svg><span>駒を選んで、着地する駒をタップ。</span></div>
+        <div id="status-panel" class="status-panel" hidden></div>
+        <div class="game-actions" aria-label="操作">
+          <button id="undo" class="action-button" disabled><svg class="icon"><use href="#i-undo"/></svg><span>1手戻す</span></button>
+          <button id="redo" class="action-button" disabled><svg class="icon"><use href="#i-redo"/></svg><span>やり直す</span></button>
+          <button id="hint" class="action-button hint-button"><svg class="icon"><use href="#i-bulb"/></svg><span>ヒント</span></button>
+          <button id="restart" class="action-button"><svg class="icon"><use href="#i-reset"/></svg><span>最初から</span></button>
+        </div>
+        <div class="field-note"><span class="note-label">FIELD NOTE</span><p id="puzzle-tip">「1」を選んで、隣の「1」へ。同じ数字はゼロになり、二枚とも消えます。</p></div>
+        <div class="console-bottom"><button id="share" class="text-button"><svg class="icon"><use href="#i-share"/></svg>同じ問題をシェア</button><span id="save-status">この端末に自動保存</span></div>
+      </section>
+    </main>
+    <footer class="site-footer"><span>ABSOLUTE ZERO <span class="footer-cross">/</span> 1.0.0</span><span>THINK AHEAD. LEAVE NOTHING.</span><button id="about" class="text-button">ABOUT / MIT</button></footer>
+  </div>
+  <dialog id="modal" aria-labelledby="modal-title">
+    <div class="dialog-top"><span class="eyebrow">ABSOLUTE ZERO</span><button id="close-modal" class="icon-button" aria-label="閉じる"><svg class="icon"><use href="#i-close"/></svg></button></div>
+    <h2 id="modal-title"></h2><div id="modal-body"></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <noscript>このゲームを遊ぶにはJavaScriptを有効にしてください。ゲームサーバーやアカウントは不要です。</noscript>
+<script>window.AZ_STANDALONE=true;
+/* Absolute Zero v1.0.0 — MIT. Pure, deterministic puzzle rules and generation. */
+(function (root, factory) {
+  'use strict';
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else { root.AZ = factory(); root.AZFactory = factory; }
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const VERSION = 'AZ1';
+  const DIRS = [[-1, 0], [0, 1], [1, 0], [0, -1]];
+  const CHAPTERS = [
+    { name: 'はじまりの一手', word: 'ORIGIN', size: 5, start: 6, end: 10, text: '数字が、そのまま移動する距離になる。' },
+    { name: '距離を読む', word: 'DISTANCE', size: 5, start: 10, end: 14, text: '目の前ではなく、着地する場所を見る。' },
+    { name: '変化をつくる', word: 'TRANSFORM', size: 6, start: 12, end: 17, text: '引き算は、次の一手の設計図。' },
+    { name: '最後から考える', word: 'REVERSE', size: 6, start: 17, end: 21, text: '最後に消える二枚は、どの二枚だろう。' },
+    { name: '余白をつなぐ', word: 'SPACE', size: 7, start: 20, end: 25, text: '残した一枚が、遠くの一枚を迎えにいく。' },
+    { name: '零への旅', word: 'ABSOLUTE', size: 7, start: 25, end: 30, text: 'すべてをつないで、何もない場所へ。' }
+  ];
+  function assertBoard(board, n) {
+    if (!Number.isInteger(n) || n < 5 || n > 7 || !Array.isArray(board) || board.length !== n * n ||
+        board.some(x => !Number.isInteger(x) || x < 0 || x > 9)) throw new Error('不正な盤面です。');
+    return true;
+  }
+  const key = board => board.join('');
+  const count = board => board.reduce((s, v) => s + (v > 0 ? 1 : 0), 0);
+  const sum = board => board.reduce((s, v) => s + v, 0);
+  function destinations(board, n, from) {
+    const a = board[from];
+    if (!a || !Number.isInteger(from) || from < 0 || from >= board.length) return [];
+    const r = Math.floor(from / n), c = from % n, out = [];
+    for (const [dr, dc] of DIRS) {
+      const rr = r + dr * a, cc = c + dc * a;
+      if (rr >= 0 && rr < n && cc >= 0 && cc < n && board[rr * n + cc]) out.push(rr * n + cc);
+    }
+    return out;
+  }
+  function moves(board, n) {
+    const out = [];
+    board.forEach((v, from) => { if (v) for (const to of destinations(board, n, from)) out.push({ from, to }); });
+    return out;
+  }
+  function apply(board, n, move) {
+    if (!move || !Number.isInteger(move.from) || !Number.isInteger(move.to) || !destinations(board, n, move.from).includes(move.to))
+      throw new Error('その移動はできません。数字と同じ距離にある駒を選んでください。');
+    const next = board.slice();
+    next[move.to] = Math.abs(board[move.from] - board[move.to]); next[move.from] = 0;
+    return next;
+  }
+  function status(board, n) { return count(board) === 0 ? 'won' : moves(board, n).length === 0 ? 'stuck' : 'playing'; }
+  function validateSolution(board, n, solution) {
+    try { assertBoard(board, n); let b = board.slice(); for (const m of solution) b = apply(b, n, m); return count(b) === 0; }
+    catch (_) { return false; }
+  }
+  function certificate(board, n, solution) {
+    if (!validateSolution(board, n, solution)) throw new Error('解答証明の検証に失敗しました。');
+    const map = new Map(); let b = board.slice();
+    for (let i = 0; i <= solution.length; i++) { map.set(key(b), solution.slice(i)); if (i < solution.length) b = apply(b, n, solution[i]); }
+    return map;
+  }
+  function hash(text) {
+    let h = 2166136261 >>> 0;
+    for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+  function rng(seed) {
+    let a = hash(String(seed));
+    return function () { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ t >>> 15, t | 1); t ^= t + Math.imul(t ^ t >>> 7, t | 61); return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  }
+  const choose = (arr, random) => arr[Math.floor(random() * arr.length)];
+  function reverseOptions(board, n, maxValue) {
+    const splits = [], pairs = [];
+    for (let to = 0; to < n * n; to++) {
+      const c = board[to], r = Math.floor(to / n), col = to % n;
+      for (let a = 1; a < n && a <= maxValue; a++) {
+        for (const [dr, dc] of DIRS) {
+          const rr = r + dr * a, cc = col + dc * a;
+          if (rr < 0 || rr >= n || cc < 0 || cc >= n) continue;
+          const from = rr * n + cc;
+          if (board[from]) continue;
+          if (!c) { if (from < to) pairs.push({ from, to, a, b: a }); }
+          else {
+            if (a + c <= maxValue) splits.push({ from, to, a, b: a + c });
+            if (a - c > 0) splits.push({ from, to, a, b: a - c });
+          }
+        }
+      }
+    }
+    return { splits, pairs };
+  }
+  /* Each inverse step has a legal forward witness; no random, unverified board is returned. */
+  function generate(seed, n, tiles, options = {}) {
+    if (![5, 6, 7].includes(n) || !Number.isInteger(tiles) || tiles < 2 || tiles > n * n) throw new Error('生成条件が不正です。');
+    const random = rng(`${VERSION}|${seed}|${n}|${tiles}`), maxValue = options.maxValue || 9;
+    let best = null;
+    for (let attempt = 0; attempt < 16; attempt++) {
+      let board = Array(n * n).fill(0); const reverse = []; let additions = 0;
+      while (count(board) < tiles) {
+        const opts = reverseOptions(board, n, maxValue);
+        const remaining = tiles - count(board);
+        let pool;
+        if (count(board) === 0) pool = opts.pairs;
+        else if (opts.splits.length && !(remaining >= 2 && additions < 3 && random() < 0.035)) pool = opts.splits;
+        else if (remaining >= 2) pool = opts.pairs;
+        else break;
+        if (!pool.length) break;
+        const s = choose(pool, random);
+        if (!board[s.to]) additions++;
+        board[s.from] = s.a; board[s.to] = s.b; reverse.push({ from: s.from, to: s.to });
+      }
+      const solution = reverse.slice().reverse(), legal = moves(board, n);
+      // Favor spatial spread and several plausible first choices, without claiming a solved difficulty rating.
+      const rows = new Set(), cols = new Set(); board.forEach((v, i) => { if (v) { rows.add(Math.floor(i / n)); cols.add(i % n); } });
+      const score = count(board) * 100 + Math.min(legal.length, 12) * 4 + rows.size + cols.size + Math.min(Math.max(...board), 9);
+      if (!best || score > best.score) best = { size: n, board, solution, score };
+      if (count(board) === tiles && legal.length >= Math.min(tiles / 2, 10) && rows.size >= n - 1 && cols.size >= n - 1) break;
+    }
+    if (!best || !validateSolution(best.board, n, best.solution)) throw new Error('解ける問題を生成できませんでした。');
+    delete best.score;
+    return best;
+  }
+  function fixed(entries, solution, title, tip) {
+    const board = Array(25).fill(0); for (const [i, v] of entries) board[i] = v;
+    return { size: 5, board, solution: solution.map(([from, to]) => ({ from, to })), title, tip };
+  }
+  const TUTORIALS = [
+    () => fixed([[11, 1], [12, 1]], [[11, 12]], '同じ数字を、重ねる', '「1」を選んで、隣の「1」へ。同じ数字はゼロになり、二枚とも消えます。'),
+    () => fixed([[10, 2], [12, 2], [11, 1], [16, 1]], [[10, 12], [11, 16]], '途中の駒は、飛び越える', '「2」は必ず2マス先へ。途中の「1」がいても、そのまま飛び越えられます。'),
+    () => fixed([[11, 1], [12, 3], [14, 2]], [[11, 12], [14, 12]], '差が、次の移動力になる', '「1」を「3」に重ねると「2」に。着地した場所で、新しい距離が生まれます。'),
+    () => fixed([[10, 4], [14, 5], [19, 1]], [[10, 14], [19, 14]], '動けない駒にも、役割がある', '5×5の「5」は自分から動けません。でも「4」の着地点にすれば「1」へ変わります。')
+  ];
+  function journey(level) {
+    if (!Number.isInteger(level) || level < 1 || level > 60) throw new Error('問題番号は1〜60です。');
+    const chapter = CHAPTERS[Math.floor((level - 1) / 10)], step = (level - 1) % 10;
+    let p;
+    if (level <= TUTORIALS.length) p = TUTORIALS[level - 1]();
+    else p = { ...generate(`journey-${level}`, chapter.size, Math.round(chapter.start + (chapter.end - chapter.start) * step / 9), { maxValue: level <= 7 ? 5 : 9 }), title: `${chapter.name} ${String(step + 1).padStart(2, '0')}`, tip: chapter.text };
+    return { ...p, mode: 'journey', level, code: `AZ1-J${String(level).padStart(2, '0')}`, label: `航路 ${String(level).padStart(2, '0')} / 60`, chapter: Math.floor((level - 1) / 10) };
+  }
+  function tokyoDate(now = Date.now()) { return new Date(now + 9 * 3600 * 1000).toISOString().slice(0, 10); }
+  function validDate(s) { return /^\d{4}-\d{2}-\d{2}$/.test(s) && Number.isFinite(Date.parse(`${s}T00:00:00Z`)) && new Date(`${s}T00:00:00Z`).toISOString().slice(0, 10) === s; }
+  function daily(date = tokyoDate(), tier = 1) {
+    if (!validDate(date) || ![0, 1, 2].includes(tier)) throw new Error('日付または難易度が不正です。');
+    const size = tier + 5, tiles = [10, 17, 25][tier], names = ['静かな一手', '思考の散歩', '深い余白'];
+    return { ...generate(`daily-${date}-${tier}`, size, tiles), mode: 'daily', date, tier, code: `AZ1-D${date.replace(/-/g, '')}-${tier + 1}`, label: `DAILY / ${date.replace(/-/g, '.')}`, title: names[tier], tip: '毎日、日本時間0時に更新。同じコードなら、世界のどこでも同じ盤面です。' };
+  }
+  function free(size = 5, seed = 'ZERO') {
+    if (![5, 6, 7].includes(size) || !/^[A-Z0-9]{1,12}$/.test(seed)) throw new Error('問題コードが不正です。');
+    return { ...generate(`free-${seed}`, size, [12, 19, 27][size - 5]), mode: 'free', seed, code: `AZ1-F${size}-${seed}`, label: 'FREE PLAY / 自由演習', title: 'ひとつずつ、ゼロへ。', tip: '時間制限はありません。戻りながら、自分だけの解き方を。' };
+  }
+  function fromCode(raw) {
+    const code = String(raw).trim().toUpperCase(); let m;
+    if ((m = /^AZ1-J(\d{2})$/.exec(code))) return journey(Number(m[1]));
+    if ((m = /^AZ1-D(\d{4})(\d{2})(\d{2})-([123])$/.exec(code))) return daily(`${m[1]}-${m[2]}-${m[3]}`, Number(m[4]) - 1);
+    if ((m = /^AZ1-F([567])-([A-Z0-9]{1,12})$/.exec(code))) return free(Number(m[1]), m[2]);
+    throw new Error('AZ1- で始まる正しい問題コードを入力してください。');
+  }
+  /* Bounded exact DFS. A limit is UNKNOWN, never a proof of impossibility. */
+  function solve(board, n, options = {}) {
+    assertBoard(board, n);
+    const now = () => typeof performance !== 'undefined' ? performance.now() : Date.now();
+    const start = now(), maxNodes = options.maxNodes ?? 200000, budgetMs = options.budgetMs ?? 4000;
+    const known = options.known instanceof Map ? options.known : new Map(options.known || []);
+    const dead = new Set(); let nodes = 0, limited = false;
+    const ordering = b => moves(b, n).sort((x, y) => {
+      const rank = m => (b[m.from] === b[m.to] ? 100 : 0) + (b[m.to] >= n ? 8 : 0) - Math.abs(b[m.from] - b[m.to]);
+      return rank(y) - rank(x);
+    });
+    function visit(b) {
+      const k = key(b);
+      if (known.has(k)) {
+        const path = known.get(k);
+        if (validateSolution(b, n, path)) return path.slice();
+        // Never trust an invalid external certificate.
+        known.delete(k);
+      }
+      if (count(b) === 0) return [];
+      if (sum(b) % 2 || count(b) === 1 || dead.has(k)) return null;
+      if (nodes >= maxNodes || (nodes % 128 === 0 && now() - start >= budgetMs)) { limited = true; return null; }
+      nodes++;
+      const unique = new Set();
+      for (const m of ordering(b)) {
+        const next = apply(b, n, m), nk = key(next);
+        if (unique.has(nk)) continue;
+        unique.add(nk);
+        const tail = visit(next);
+        if (tail) return [m, ...tail];
+        if (limited) return null;
+      }
+      dead.add(k); return null;
+    }
+    const result = visit(board);
+    return { status: result ? 'solved' : limited ? 'limit' : 'unsolvable', moves: result || [], nodes, elapsedMs: Math.round(now() - start) };
+  }
+  function validateSession(value) {
+    if (!value || value.version !== VERSION || typeof value.code !== 'string') throw new Error('保存形式が異なります。');
+    const puzzle = fromCode(value.code);
+    if (!Array.isArray(value.history) || value.history.length > 49 || !Array.isArray(value.redo) || value.redo.length > 49) throw new Error('履歴が不正です。');
+    let board = puzzle.board.slice();
+    for (const m of value.history) board = apply(board, puzzle.size, m);
+    let redoBoard = board.slice(); for (let i = value.redo.length - 1; i >= 0; i--) redoBoard = apply(redoBoard, puzzle.size, value.redo[i]);
+    const stats = value.stats || {};
+    for (const name of ['hints', 'undos', 'restarts', 'elapsed']) if (!Number.isFinite(stats[name]) || stats[name] < 0 || stats[name] > 1e12) throw new Error('保存記録が不正です。');
+    return { puzzle, board, history: value.history, redo: value.redo, stats, awarded: !!value.awarded };
+  }
+  return { VERSION, CHAPTERS, DIRS, assertBoard, key, count, sum, destinations, moves, apply, status, validateSolution, certificate, hash, rng, generate, journey, daily, free, fromCode, tokyoDate, validDate, solve, validateSession };
+});
+
+/* Absolute Zero v1.0.0 — MIT. UI, input and local-only persistence. */
+(() => {
+  'use strict';
+  const A = window.AZ, $ = id => document.getElementById(id);
+  const STORAGE_KEY = 'absolute-zero:v1';
+  const icon = name => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+  const esc = text => String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const defaultStore = () => ({ version: A.VERSION, current: 'AZ1-J01', lastMode: {}, sessions: {}, records: {}, dailyWins: [], settings: { sound: false, dark: false, motion: true } });
+  let store = defaultStore(), state = null, known = new Map(), selected = -1, cells = [];
+  let locked = false, revision = 0, hintMove = null, solver = null, searching = false, analysisResult = null;
+  let toastTimer, winTimer, lastTick = Date.now(), lastSaveTick = 0, saveFailed = false, warnedStorage = false;
+  let waitingWorker = null, applyUpdate = false, lastFocus = null, pendingImport = null, audioContext = null;
+  const reducedMotion = () => !store.settings.motion || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const isHttp = /^https?:$/.test(location.protocol);
+  const formatTime = ms => { const s = Math.floor(ms / 1000); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  const coord = (i, n) => `${String.fromCharCode(65 + i % n)}${Math.floor(i / n) + 1}`;
+  function toast(text) { clearTimeout(toastTimer); $('toast').textContent = text; $('toast').classList.add('visible'); toastTimer = setTimeout(() => $('toast').classList.remove('visible'), 4200); }
+  function sanitizeStore(input, strict = false) {
+    if (!input || input.version !== A.VERSION || typeof input !== 'object') throw new Error('このバージョンの保存データではありません。');
+    const out = defaultStore();
+    for (const k of ['sound', 'dark', 'motion']) if (typeof input.settings?.[k] === 'boolean') out.settings[k] = input.settings[k];
+    if (typeof input.current === 'string') { try { A.fromCode(input.current); out.current = input.current; } catch (_) { if (strict) throw new Error('現在の問題コードが不正です。'); } }
+    for (const mode of ['journey', 'daily', 'free']) { const code = input.lastMode?.[mode]; if (typeof code === 'string') { try { if (A.fromCode(code).mode === mode) out.lastMode[mode] = code; } catch (_) {} } }
+    if (input.sessions && typeof input.sessions === 'object') for (const [code, val] of Object.entries(input.sessions).slice(-20)) {
+      try { if (val.code !== code) throw new Error('保存コードが一致しません。'); A.validateSession(val); out.sessions[code] = val; }
+      catch (err) { if (strict) throw err; }
+    }
+    if (input.records && typeof input.records === 'object') for (const [code, rec] of Object.entries(input.records).slice(-10000)) {
+      if (!/^AZ1-(J\d{2}|D\d{8}-[123]|F[567]-[A-Z0-9]{1,12})$/.test(code)) continue;
+      if (rec && Number.isInteger(rec.stars) && rec.stars >= 1 && rec.stars <= 3 && Number.isFinite(rec.bestTime) && rec.bestTime >= 0 && Number.isInteger(rec.bestMoves) && rec.bestMoves > 0 && rec.bestMoves <= 49 && Number.isInteger(rec.clears) && rec.clears > 0) {
+        out.records[code] = { stars: rec.stars, bestTime: Math.min(rec.bestTime, 1e12), bestMoves: rec.bestMoves, clears: Math.min(rec.clears, 1e9) };
+      } else if (strict) throw new Error('クリア記録が不正です。');
+    }
+    out.dailyWins = Array.isArray(input.dailyWins) ? [...new Set(input.dailyWins.filter(x => typeof x === 'string' && A.validDate(x)))].slice(-10000) : [];
+    return out;
+  }
+  function persist() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); saveFailed = false; }
+    catch (_) { saveFailed = true; if (!warnedStorage) { toast('保存領域を使えません。設定の「記録を書き出す」で保管できます。'); warnedStorage = true; } }
+    $('save-status').textContent = saveFailed ? '保存不可・書き出し推奨' : 'この端末に自動保存';
+  }
+  function saveSession() {
+    if (!state) return;
+    const { puzzle, history, redo, stats, awarded } = state;
+    delete store.sessions[puzzle.code];
+    store.sessions[puzzle.code] = { version: A.VERSION, code: puzzle.code, history, redo, stats: { ...stats }, awarded, updatedAt: Date.now() };
+    while (Object.keys(store.sessions).length > 20) delete store.sessions[Object.keys(store.sessions)[0]];
+    store.current = puzzle.code; store.lastMode[puzzle.mode] = puzzle.code;
+    persist();
+  }
+  try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) store = sanitizeStore(JSON.parse(raw)); }
+  catch (_) { setTimeout(() => toast('保存データを読み込めなかったため、新しい盤面から始めます。'), 300); }
+  function applySettings() { document.body.classList.toggle('dark', store.settings.dark); document.body.classList.toggle('no-motion', !store.settings.motion); document.querySelector('meta[name="theme-color"]').content = store.settings.dark ? '#14211d' : '#183c32'; }
+  function cancelSearch() { if (solver) { solver.terminate(); solver = null; } searching = false; revision++; }
+  function boardAfter(history) { let b = state.puzzle.board.slice(); for (const move of history) b = A.apply(b, state.puzzle.size, move); return b; }
+  function loadPuzzle(puzzle, { fresh = false, updateURL = true } = {}) {
+    saveSession(); cancelSearch(); clearTimeout(winTimer); locked = false; selected = -1; hintMove = null; analysisResult = null;
+    state = { puzzle, board: puzzle.board.slice(), history: [], redo: [], stats: { hints: 0, undos: 0, restarts: 0, elapsed: 0 }, awarded: false, winShown: false };
+    const saved = store.sessions[puzzle.code];
+    if (!fresh && saved && !saved.awarded) {
+      try { const restored = A.validateSession(saved); Object.assign(state, restored); }
+      catch (_) { delete store.sessions[puzzle.code]; toast('この問題の途中データが不正なため、最初から始めます。'); }
+    }
+    known = A.certificate(puzzle.board, puzzle.size, puzzle.solution);
+    buildBoard(); render(); lastTick = Date.now(); saveSession();
+    if (updateURL) try { const url = new URL(location.href); url.searchParams.set('p', puzzle.code); history.replaceState(null, '', url.href); } catch (_) {}
+    if (A.status(state.board, puzzle.size) === 'won') winTimer = setTimeout(checkEnd, 100);
+  }
+  function buildBoard() {
+    const board = $('board'), n = state.puzzle.size;
+    board.innerHTML = ''; board.style.setProperty('--n', n); board.dataset.code = state.puzzle.code;
+    board.setAttribute('aria-label', `${n}行${n}列の盤面。列はAから、行は1からです。`);
+    cells = state.board.map((_, i) => {
+      const cell = document.createElement('button'); cell.type = 'button'; cell.className = 'cell'; cell.dataset.index = i; cell.dataset.size = n;
+      cell.style.setProperty('--i', Math.floor(i / n) + i % n);
+      const value = document.createElement('span'); value.className = 'tile-value'; value.setAttribute('aria-hidden', 'true');
+      const mark = document.createElement('span'); mark.className = 'tile-mark'; mark.setAttribute('aria-hidden', 'true');
+      cell.append(value, mark); board.append(cell); return cell;
+    });
+  }
+  function pathCells(from, to, n) {
+    const dr = Math.sign(Math.floor(to / n) - Math.floor(from / n)), dc = Math.sign(to % n - from % n);
+    const out = []; let x = from + dr * n + dc;
+    while (x !== to && out.length < n) { out.push(x); x += dr * n + dc; }
+    return out;
+  }
+  function render() {
+    if (!state) return;
+    const { puzzle: p, board: b, history, redo } = state, n = p.size;
+    if (selected >= 0 && !b[selected]) selected = -1;
+    const targets = selected >= 0 ? A.destinations(b, n, selected) : [];
+    const path = new Set(); for (const to of targets) for (const i of pathCells(selected, to, n)) path.add(i);
+    const lastMove = history[history.length - 1];
+    cells.forEach((cell, i) => {
+      const value = b[i], dest = value ? A.destinations(b, n, i) : [];
+      cell.className = `cell ${value ? 'tile' : 'empty'}`;
+      cell.classList.toggle('selected', i === selected); cell.classList.toggle('landing', targets.includes(i));
+      cell.classList.toggle('anchored', value > 0 && value >= n); cell.classList.toggle('flight-path', path.has(i) && !value);
+      cell.classList.toggle('hint-source', !!hintMove && hintMove.from === i); cell.classList.toggle('hint-target', !!hintMove && hintMove.to === i);
+      cell.classList.toggle('last-destination', !!lastMove && lastMove.to === i);
+      cell.dataset.value = value; cell.dataset.result = targets.includes(i) ? `→${Math.abs(b[selected] - value)}` : '';
+      cell.children[0].textContent = value || '';
+      cell.children[1].textContent = !value ? '' : value >= n ? '受け' : dest.length ? dest.map(to => Math.floor(to / n) < Math.floor(i / n) ? '↑' : Math.floor(to / n) > Math.floor(i / n) ? '↓' : to > i ? '→' : '←').join('') : '·';
+      cell.setAttribute('aria-label', `${coord(i, n)}、${value ? `数字${value}、${dest.length ? `${dest.length}方向に移動可能` : '現在は移動先なし'}` : '空きマス'}${targets.includes(i) ? `、着地すると${Math.abs(b[selected] - value)}` : ''}`);
+      cell.setAttribute('aria-pressed', String(i === selected)); cell.tabIndex = value ? 0 : -1;
+    });
+    $('board').setAttribute('aria-busy', String(locked)); $('board').classList.toggle('board-clear', A.count(b) === 0);
+    $('remaining').textContent = A.count(b); $('move-count').textContent = history.length;
+    $('puzzle-label').textContent = p.label; $('puzzle-title').textContent = p.title; $('puzzle-tip').textContent = p.tip;
+    $('board-size').textContent = `${n} × ${n}`; $('board-number').textContent = p.mode === 'journey' ? String(p.level).padStart(2, '0') : p.mode === 'daily' ? 'DAY' : '∞';
+    $('board-phase').textContent = A.count(b) === 0 ? 'ABSOLUTE ZERO' : A.status(b, n) === 'stuck' ? 'NO MORE MOVES' : 'MAKE IT ZERO';
+    $('board-footer-text').textContent = hintMove ? '点滅する駒から、点線の駒へ' : '数字と同じ距離だけ、上下左右へ';
+    $('undo').disabled = !history.length || locked; $('redo').disabled = !redo.length || locked;
+    $('restart').disabled = locked; $('hint').disabled = searching || locked || A.count(b) === 0;
+    $('hint').querySelector('span').textContent = searching ? '考え中…' : hintMove ? 'ヒント表示中' : 'ヒント';
+    document.querySelectorAll('[data-mode]').forEach(el => { const active = el.dataset.mode === p.mode; el.classList.toggle('active', active); el.setAttribute('aria-pressed', String(active)); });
+    let text;
+    if (A.count(b) === 0) text = '<strong>すべてが、ゼロになりました。</strong>';
+    else if (selected >= 0) text = targets.length ? `<strong>${b[selected]}</strong> は ${b[selected]}マス先へ。枠のある駒をタップ。` : `<strong>${b[selected]}</strong> に着地先がありません。別の駒から重ねる方法を。`;
+    else text = '駒を選んで、着地する駒をタップ。スワイプも使えます。';
+    $('selection-info').innerHTML = icon('arrow') + `<span>${text}</span>`;
+    renderStatus(); renderProgress();
+  }
+  function renderProgress() {
+    const cleared = Object.keys(store.records).filter(k => /^AZ1-J\d{2}$/.test(k)).length;
+    $('progress-text').textContent = `${cleared} / 60`; $('progress-bar').style.width = `${cleared / 60 * 100}%`;
+    $('journey-note').textContent = cleared === 60 ? '60の航路、すべてがゼロに。' : cleared ? `${cleared}の盤面に、何もない場所をつくりました。` : '急がなくていい。ひとつずつ、無へ。';
+  }
+  function renderStatus() {
+    const panel = $('status-panel'), st = A.status(state.board, state.puzzle.size);
+    panel.hidden = true; panel.className = 'status-panel'; panel.innerHTML = '';
+    if (st === 'won') { panel.hidden = false; panel.classList.add('success'); panel.innerHTML = `<p><strong>ZERO. 全消し達成。</strong></p><button class="small-button" data-action="result">結果を見る</button>`; }
+    else if (st === 'stuck') { panel.hidden = false; panel.classList.add('warning'); panel.innerHTML = '<p><strong>これ以上、動かせる駒がありません。</strong><br>この挑戦は行き止まりです。1手戻すか、最初から再挑戦できます。</p>'; }
+    else if (searching) { panel.hidden = false; panel.innerHTML = '<p>この局面から、全消しまでの経路を確認しています。</p><button class="small-button" data-action="cancel-search">探索を止める</button>'; }
+    else if (hintMove) {
+      panel.hidden = false; panel.classList.add('hint-panel'); const a = state.board[hintMove.from], b = state.board[hintMove.to], n = state.puzzle.size;
+      panel.innerHTML = `<p><strong>${coord(hintMove.from, n)} の ${a} → ${coord(hintMove.to, n)} の ${b}</strong><br>|${a} − ${b}| = ${Math.abs(a - b)}。この一手の先に、全消しの経路があります。</p><button class="small-button" data-action="hide-hint">ヒントを隠す</button>`;
+    } else if (analysisResult) {
+      panel.hidden = false; panel.classList.add('warning');
+      panel.innerHTML = `<p>${analysisResult === 'unsolvable' ? '<strong>この局面からの全消し経路はありません。</strong><br>探索で確認しました。戻って別の順序を試しましょう。' : '<strong>制限内では解答経路を確認できませんでした。</strong><br>解けないという判定ではありません。解答が確認済みの局面へ戻れます。'}</p><button class="small-button" data-action="rewind-safe">解答のある局面へ戻る</button>`;
+    }
+  }
+  function selectCell(index) {
+    if (locked || searching || $('modal').open || !state.board[index]) return;
+    if (selected >= 0 && selected !== index && A.destinations(state.board, state.puzzle.size, selected).includes(index)) { performMove({ from: selected, to: index }); return; }
+    selected = selected === index ? -1 : index; render();
+  }
+  function sound(kind, value = 1) {
+    if (!store.settings.sound) return;
+    try {
+      const Audio = window.AudioContext || window.webkitAudioContext; if (!Audio) return;
+      if (!audioContext) audioContext = new Audio(); if (audioContext.state === 'suspended') audioContext.resume();
+      const base = kind === 'clear' ? 392 : kind === 'zero' ? 523.25 : 220 + value * 22;
+      const notes = kind === 'clear' ? [1, 1.25, 1.5, 2] : kind === 'zero' ? [1, 1.5] : [1];
+      notes.forEach((mult, i) => { const t = audioContext.currentTime + i * .10, o = audioContext.createOscillator(), gain = audioContext.createGain(); o.type = 'sine'; o.frequency.value = base * mult; gain.gain.setValueAtTime(0, t); gain.gain.linearRampToValueAtTime(.055, t + .012); gain.gain.exponentialRampToValueAtTime(.001, t + .28); o.connect(gain); gain.connect(audioContext.destination); o.start(t); o.stop(t + .31); });
+    } catch (_) {}
+  }
+  function animateMove(fromRect, toRect, a, zero) {
+    if (reducedMotion()) return;
+    const ghost = document.createElement('span'); ghost.className = 'ghost-tile'; ghost.textContent = a;
+    Object.assign(ghost.style, { left: `${fromRect.left}px`, top: `${fromRect.top}px`, width: `${fromRect.width}px`, height: `${fromRect.height}px` });
+    document.body.append(ghost); ghost.getBoundingClientRect();
+    ghost.style.transform = `translate(${toRect.left - fromRect.left}px,${toRect.top - fromRect.top}px) scale(.85)`; ghost.style.opacity = '.05';
+    setTimeout(() => { ghost.remove(); if (!zero) return; for (let i = 0; i < 8; i++) { const s = document.createElement('span'); s.className = 'spark'; s.style.left = `${toRect.left + toRect.width / 2}px`; s.style.top = `${toRect.top + toRect.height / 2}px`; s.style.setProperty('--dx', `${Math.cos(i * Math.PI / 4) * 36}px`); s.style.setProperty('--dy', `${Math.sin(i * Math.PI / 4) * 36}px`); document.body.append(s); setTimeout(() => s.remove(), 510); } }, 190);
+  }
+  function performMove(move, replay = false) {
+    if (locked || $('modal').open) return false;
+    const n = state.puzzle.size;
+    if (!A.destinations(state.board, n, move.from).includes(move.to)) { toast('数字と同じ距離に、着地する駒が必要です。'); return false; }
+    const fromRect = cells[move.from].getBoundingClientRect(), toRect = cells[move.to].getBoundingClientRect();
+    const a = state.board[move.from], zero = a === state.board[move.to];
+    cancelSearch(); hintMove = null; analysisResult = null;
+    state.board = A.apply(state.board, n, move); state.history.push({ from: move.from, to: move.to });
+    if (!replay) state.redo = []; selected = -1; locked = true; const token = revision;
+    render(); saveSession(); sound(zero ? 'zero' : 'move', state.board[move.to]); animateMove(fromRect, toRect, a, zero);
+    setTimeout(() => { if (token !== revision) return; locked = false; render(); checkEnd(); }, reducedMotion() ? 0 : 205);
+    return true;
+  }
+  function undo() {
+    if (locked || !state.history.length || $('modal').open) return;
+    cancelSearch(); clearTimeout(winTimer); state.redo.push(state.history.pop()); state.board = boardAfter(state.history);
+    state.stats.undos++; state.winShown = false; selected = -1; hintMove = null; analysisResult = null; render(); saveSession();
+  }
+  function redo() {
+    if (locked || !state.redo.length || $('modal').open) return;
+    const move = state.redo.pop(); if (!performMove(move, true)) state.redo.push(move);
+  }
+  function restart() {
+    closeDialog(); cancelSearch(); clearTimeout(winTimer); state.board = state.puzzle.board.slice(); state.history = []; state.redo = [];
+    state.stats.restarts++; state.winShown = false; selected = -1; hintMove = null; analysisResult = null; locked = false; render(); saveSession(); toast('最初の盤面に戻りました。');
+  }
+  function confirmRestart() {
+    openDialog('最初から、考え直す？', '<p>この問題の駒を初期配置に戻します。クリア済みの記録は残ります。ヒントと戻した回数は、この挑戦の記録に引き継がれます。</p><div class="dialog-buttons"><button class="primary-button secondary-button" data-action="close">続ける</button><button class="primary-button" data-action="restart-confirm">最初から</button></div>');
+  }
+  function rewindSafe() {
+    cancelSearch(); clearTimeout(winTimer);
+    let b = state.puzzle.board.slice(), safeHistory = [], best = b, steps = 0;
+    for (let i = 0; i < state.history.length; i++) { b = A.apply(b, state.puzzle.size, state.history[i]); if (known.has(A.key(b)) && i + 1 < state.history.length) { safeHistory = state.history.slice(0, i + 1); best = b; steps = i + 1; } }
+    const rewound = state.history.length - steps; state.stats.undos += rewound; state.history = safeHistory; state.board = best; state.redo = [];
+    selected = -1; hintMove = null; analysisResult = null; state.winShown = false; render(); saveSession(); toast(`${rewound}手戻しました。この局面からは全消しできます。`);
+  }
+  function showHint(path) {
+    if (!path.length) return;
+    if (!A.validateSolution(state.board, state.puzzle.size, path)) { analysisResult = 'limit'; render(); return; }
+    const extra = A.certificate(state.board, state.puzzle.size, path); for (const [k, v] of extra) known.set(k, v);
+    hintMove = path[0]; selected = -1; state.stats.hints++; analysisResult = null; render(); saveSession();
+  }
+  function requestHint() {
+    if (locked || searching || $('modal').open || A.count(state.board) === 0) return;
+    if (hintMove) { hintMove = null; render(); return; }
+    const cached = known.get(A.key(state.board)); if (cached) { showHint(cached); return; }
+    cancelSearch(); searching = true; selected = -1; analysisResult = null; const token = revision; render();
+    try {
+      // A local Blob worker keeps the single-file edition self-contained and the main UI responsive.
+      const source = `const AZ=(${window.AZFactory.toString()})();self.onmessage=function(e){try{const d=e.data;self.postMessage(AZ.solve(d.board,d.size,{known:d.known,maxNodes:220000,budgetMs:4500}));}catch(e){self.postMessage({status:'error',message:String(e.message)});}};`;
+      const url = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+      solver = new Worker(url); URL.revokeObjectURL(url);
+      solver.onmessage = ({ data }) => { if (revision !== token) return; solver.terminate(); solver = null; searching = false; if (data.status === 'solved') showHint(data.moves); else { analysisResult = data.status === 'unsolvable' ? 'unsolvable' : 'limit'; render(); } };
+      solver.onerror = () => { if (revision !== token) return; cancelSearch(); analysisResult = 'limit'; render(); toast('このブラウザでは探索を完了できませんでした。解答のある局面へ戻せます。'); };
+      solver.postMessage({ board: state.board, size: state.puzzle.size, known: [...known] });
+    } catch (_) { cancelSearch(); analysisResult = 'limit'; render(); }
+  }
+  function starsFor(stats) { return 1 + (stats.hints === 0 ? 1 : 0) + (stats.undos === 0 && stats.restarts === 0 ? 1 : 0); }
+  function checkEnd() {
+    if (A.status(state.board, state.puzzle.size) !== 'won') return;
+    if (!state.awarded) {
+      const code = state.puzzle.code, old = store.records[code];
+      store.records[code] = { stars: Math.max(starsFor(state.stats), old?.stars || 0), bestTime: Math.min(state.stats.elapsed, old?.bestTime ?? Infinity), bestMoves: Math.min(state.history.length, old?.bestMoves ?? Infinity), clears: (old?.clears || 0) + 1 };
+      if (state.puzzle.mode === 'daily' && state.puzzle.date === A.tokyoDate() && !store.dailyWins.includes(state.puzzle.date)) store.dailyWins.push(state.puzzle.date);
+      state.awarded = true; saveSession(); renderProgress(); sound('clear');
+    }
+    if (!state.winShown) { state.winShown = true; winTimer = setTimeout(showWin, reducedMotion() ? 20 : 400); }
+  }
+  function openDialog(title, html) { lastFocus = document.activeElement; $('modal-title').textContent = title; $('modal-body').innerHTML = html; if (!$('modal').open) $('modal').showModal(); lastTick = Date.now(); }
+  function closeDialog() { if ($('modal').open) $('modal').close(); lastTick = Date.now(); }
+  function showWin() {
+    if (A.status(state.board, state.puzzle.size) !== 'won') return;
+    const { puzzle: p, stats, history } = state, stars = starsFor(stats);
+    const nextText = p.mode === 'journey' && p.level < 60 ? '次の航路へ' : p.mode === 'journey' ? '60の航路を見る' : p.mode === 'daily' ? '別の難易度へ' : '新しい盤面へ';
+    openDialog('何もない。その達成感。', `<div class="win-heading"><div class="win-zero">0</div><p>${esc(p.label)} · 全消し達成</p></div><div class="win-stars" aria-label="星${stars}個">${'★'.repeat(stars)}${'☆'.repeat(3 - stars)}</div><div class="stats-grid"><div class="stat"><strong>${history.length}</strong><span>手で全消し</span></div><div class="stat"><strong>${formatTime(stats.elapsed)}</strong><span>考えた時間</span></div><div class="stat"><strong>${stats.hints}</strong><span>ヒント</span></div></div><div class="award-list"><span class="earned">✓ 全消し</span><span class="${stats.hints === 0 ? 'earned' : ''}">${stats.hints === 0 ? '✓' : '·'} ヒントなし</span><span class="${stats.undos + stats.restarts === 0 ? 'earned' : ''}">${stats.undos + stats.restarts === 0 ? '✓' : '·'} 戻しなし</span></div><p style="text-align:center;font-size:10px">星は解き方の記録です。手数の最小値を表すものではありません。</p><div class="dialog-buttons single"><button class="primary-button" data-action="next">${nextText}${icon('arrow')}</button></div><div class="dialog-buttons"><button class="primary-button secondary-button" data-action="replay">もう一度</button><button class="primary-button secondary-button" data-action="share-result">結果をシェア</button></div>`);
+  }
+  function showRules() {
+    openDialog('数字で跳び、差で消す。', `<p class="dialog-intro">目標は、盤面のすべての駒を消すこと。新しい駒は増えません。時間制限もありません。</p><div class="rule-row"><span class="rule-number">01</span><div><h3>数字と同じ距離だけ、跳ぶ。</h3><p>「3」は上下左右の3マス先へ。斜め移動や、途中で止まる移動はできません。間にいる駒は飛び越えます。</p></div></div><div class="rule-row"><span class="rule-number">02</span><div><h3>別の駒にだけ、着地できる。</h3><p>駒をタップすると、着地できる駒が枠で表示されます。行き先をタップするか、動かす駒から上下左右へスワイプしてください。空きマスには着地できません。</p></div></div><div class="rule-formula">| 5 − 2 | = 3<small>着地したマスに、差の絶対値が残ります。</small></div><div class="rule-row"><span class="rule-number">03</span><div><h3>同じ数字なら、どちらも消える。</h3><p>「3」と「3」ならゼロ。最後の一組は、同じ数字の距離だけ離れた同数の駒にする必要があります。</p></div></div><div class="rule-row"><span class="rule-number">04</span><div><h3>動けなくなったら、順序を考え直す。</h3><p>駒が残り、合法手がなくなると行き止まり。「1手戻す」で戻れます。ヒントは、全消し経路を確認できた場合だけ提示します。</p></div></div><div class="rule-row"><span class="rule-number">05</span><div><h3>「受け」の駒は、着地点。</h3><p>5×5の「5〜9」、6×6の「6〜9」、7×7の「7〜9」は盤外に出てしまうため自力では動けません。他の駒を重ねて、小さな数字に変えられます。</p></div></div><p>PC：駒を選択して矢印キーで移動。U / Ctrl+Zで戻す、Shift+Ctrl+Zで再実行、Hでヒント、Escで選択解除。TabとEnterでも操作できます。</p><button class="primary-button" data-action="close">盤面へ戻る${icon('arrow')}</button>`);
+  }
+  function showJourney() {
+    const blocks = A.CHAPTERS.map((ch, ci) => `<section class="chapter-block"><div class="chapter-title"><span>${String(ci + 1).padStart(2, '0')} / ${ch.name}</span><small>${ch.size}×${ch.size} · ${ch.word}</small></div><div class="level-grid">${Array.from({ length: 10 }, (_, j) => { const l = ci * 10 + j + 1, code = `AZ1-J${String(l).padStart(2, '0')}`, rec = store.records[code]; return `<button class="level-choice ${rec ? 'cleared' : ''} ${state.puzzle.code === code ? 'current' : ''}" data-action="level" data-level="${l}" aria-label="航路${l}${rec ? `、星${rec.stars}個でクリア済み` : '、未クリア'}">${String(l).padStart(2, '0')}<small>${rec ? '★'.repeat(rec.stars) + '·'.repeat(3 - rec.stars) : '—'}</small></button>`; }).join('')}</div></section>`).join('');
+    openDialog('60の航路。ゼロへの旅。', `<p class="dialog-intro">最初の4面でルールを体験。好きな面から挑戦できます。緑色はクリア済みです。</p>${blocks}`);
+  }
+  function showDaily() {
+    const date = A.tokyoDate();
+    openDialog('今日の、ゼロ。', `<p class="dialog-intro">${date.replace(/-/g, '.')} / 日本時間 UTC+9<br>3つの盤面から選べます。同じ日・難易度・版の問題は、全員共通です。</p><div class="mode-options">${['静かな一手', '思考の散歩', '深い余白'].map((name, tier) => { const code = `AZ1-D${date.replace(/-/g, '')}-${tier + 1}`, rec = store.records[code]; return `<button class="option-button ${state.puzzle.code === code ? 'selected' : ''}" data-action="daily" data-tier="${tier}"><strong>${tier + 5}×${tier + 5}</strong><span>${name}</span><small>${rec ? '★'.repeat(rec.stars) : '未クリア'}</small></button>`; }).join('')}</div><p>更新は日本時間0時です。プレイ中の盤面は勝手に切り替わりません。更新後はデイリータブから新しい問題を選べます。</p>`);
+  }
+  function newSeed() {
+    try { const bytes = new Uint32Array(2); crypto.getRandomValues(bytes); return (bytes[0].toString(36) + bytes[1].toString(36)).slice(0, 10).toUpperCase(); }
+    catch (_) { return (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)).slice(-10).toUpperCase(); }
+  }
+  function showFree() {
+    openDialog('好きなだけ、考える。', '<p class="dialog-intro">新しい盤面を生成します。すべてに検証済みの解答経路があります。途中の問題は自動保存されます。</p><div class="mode-options">' + [5, 6, 7].map((n, i) => `<button class="option-button" data-action="free" data-size="${n}"><strong>${n}×${n}</strong><span>${['ひと息', 'じっくり', '深く'][i]}</span><small>${[12, 19, 27][i]}枚を目標に生成</small></button>`).join('') + '</div><div class="dialog-divider"></div><label class="input-label" for="puzzle-code">友だちの問題コードを入力</label><input id="puzzle-code" class="code-input" maxlength="32" placeholder="AZ1-F5-ZERO" autocapitalize="characters" autocomplete="off" spellcheck="false"><div class="dialog-buttons single"><button class="primary-button" data-action="load-code">この問題を開く</button></div><p style="font-size:10px">AZ1-J01、AZ1-D20260907-2 など、航路やデイリーのコードも使えます。</p>');
+  }
+  function streak() {
+    let d = A.tokyoDate(), n = 0; const dates = new Set(store.dailyWins);
+    if (!dates.has(d)) d = new Date(Date.parse(d) - 86400000).toISOString().slice(0, 10);
+    while (dates.has(d)) { n++; d = new Date(Date.parse(d) - 86400000).toISOString().slice(0, 10); } return n;
+  }
+  function showSettings() {
+    const records = Object.values(store.records), cleared = Object.keys(store.records).filter(k => /^AZ1-J\d{2}$/.test(k)).length;
+    openDialog('自分のペースで。', `<div class="stats-grid"><div class="stat"><strong>${cleared}</strong><span>航路クリア / 60</span></div><div class="stat"><strong>${records.reduce((s, r) => s + r.clears, 0)}</strong><span>全消し回数</span></div><div class="stat"><strong>${streak()}</strong><span>デイリー連続日数</span></div></div><label class="setting-row"><span>サウンド<small>駒が重なる、控えめな音。</small></span><input class="switch" type="checkbox" data-setting="sound" ${store.settings.sound ? 'checked' : ''}></label><label class="setting-row"><span>ダークモード<small>盤面は高コントラストのまま。</small></span><input class="switch" type="checkbox" data-setting="dark" ${store.settings.dark ? 'checked' : ''}></label><label class="setting-row"><span>アニメーション<small>端末の「視差効果を減らす」設定も尊重します。</small></span><input class="switch" type="checkbox" data-setting="motion" ${store.settings.motion ? 'checked' : ''}></label><div class="dialog-divider"></div><p>記録はこのブラウザ内に保存します。端末間の同期はありません。途中の盤面は直近20件まで保存し、クリア記録は別に保持します。</p><div class="settings-links"><button class="small-button" data-action="export">記録を書き出す</button><button class="small-button" data-action="import">記録を読み込む</button><button class="small-button" data-action="install-help">ホーム画面に追加</button><button class="small-button" data-action="resume">保存中の問題を開く</button></div>${waitingWorker ? '<p><button class="primary-button" data-action="update">新しい版を適用して再読み込み</button></p>' : ''}<button class="danger-link" data-action="reset-data">このゲームの記録を削除する</button><p style="font-size:10px">広告・解析・外部フォント・アカウント・APIキーは使用しません。デイリー連続日数は、その日の問題を当日に解いた記録です。端末時計の変更を検証するサーバーはありません。</p>`);
+  }
+  function showResume() {
+    const sessions = Object.values(store.sessions).reverse().filter(s => !s.awarded);
+    openDialog('考えかけの、続きを。', `<p class="dialog-intro">直近20件のうち、未クリアの盤面です。</p>${sessions.map(s => `<button class="primary-button secondary-button" style="margin:8px 0" data-action="resume-code" data-code="${esc(s.code)}">${esc(s.code)} · ${s.history.length}手目${icon('arrow')}</button>`).join('') || '<p>保存中の問題はありません。</p>'}`);
+  }
+  function showAbout() {
+    openDialog('Absolute Zero', '<p>数字と同じ距離を跳び、引き算の絶対値で駒を重ねるロジックパズル。提示されたゲームルールをもとに、新規に実装したバージョン1.0.0です。</p><p><strong>実装・配布：MIT License</strong><br>Copyright (c) 2026 Absolute Zero contributors<br>第三者製のゲームコード・画像・音楽・フォントは同梱していません。効果音はブラウザ内で合成します。</p><p>市場での唯一性、商標の使用可能性、第三者権利の不存在は保証していません。タイトルを含む独自性の調査は別途必要です。</p><p>通常問題60面、デイリー3段階、自由演習。生成問題には、初期盤面を全消しできる検証済みの手順を付けています。すべての合法手が正解につながるわけではありません。</p><p style="font-size:11px">コード体系 AZ1 / 日本時間 UTC+9 / ローカル保存のみ</p><button class="primary-button" data-action="close">盤面へ戻る</button>');
+  }
+  function shareText(result = false) {
+    const p = state.puzzle; let text = `ABSOLUTE ZERO\n${p.label}\n`;
+    if (result && A.count(state.board) === 0) { const stars = starsFor(state.stats); text += `${'★'.repeat(stars)}${'☆'.repeat(3 - stars)} ${state.history.length}手で全消し\nヒント ${state.stats.hints} / 戻し ${state.stats.undos} / 再開 ${state.stats.restarts}\n`; }
+    text += `問題コード：${p.code}`;
+    if (isHttp && !['localhost', '127.0.0.1'].includes(location.hostname)) { const url = new URL(location.href); url.search = ''; url.searchParams.set('p', p.code); url.hash = ''; text += `\n${url.href}`; }
+    return text;
+  }
+  function showShare(result = false) {
+    const text = shareText(result);
+    openDialog(result ? 'ゼロになった、記録。' : '同じ盤面で、考えよう。', `<p>コードを受け取った相手は、自由演習のコード入力から同じ問題を開けます。解答手順は含みません。</p><textarea id="share-text" class="share-area" readonly>${esc(text)}</textarea><div class="dialog-buttons"><button class="primary-button" data-action="copy">コピーする</button><button class="primary-button secondary-button" data-action="native-share">共有メニュー</button></div>`);
+  }
+  function exportData() {
+    saveSession(); const blob = new Blob([JSON.stringify(store, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `absolute-zero-save-${A.tokyoDate()}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 5000); toast('記録を書き出しました。');
+  }
+  function importData() {
+    const input = document.createElement('input'); input.type = 'file'; input.accept = '.json,application/json';
+    input.onchange = async () => {
+      const file = input.files[0]; if (!file) return;
+      try {
+        if (file.size > 2 * 1024 * 1024) throw new Error('保存ファイルは2MB以内にしてください。');
+        pendingImport = sanitizeStore(JSON.parse(await file.text()), true);
+        openDialog('この記録に入れ替える？', `<p>読み込む記録：${Object.keys(pendingImport.records).length}問題のクリア、${Object.keys(pendingImport.sessions).length}件の途中盤面。</p><p>現在の記録に上書きします。必要なら、先に現在の記録を書き出してください。</p><div class="dialog-buttons"><button class="primary-button secondary-button" data-action="close">やめる</button><button class="primary-button" data-action="confirm-import">入れ替える</button></div>`);
+      } catch (err) { pendingImport = null; toast(`読み込めません：${err.message}`); }
+    }; input.click();
+  }
+  function changeMode(mode) {
+    if (locked) return;
+    if (mode === state.puzzle.mode) { if (mode === 'journey') showJourney(); else if (mode === 'daily') showDaily(); else showFree(); return; }
+    if (mode === 'journey') { const code = store.lastMode.journey || 'AZ1-J01'; loadPuzzle(A.fromCode(code)); }
+    else if (mode === 'daily') showDaily(); else showFree();
+  }
+  function nextPuzzle() {
+    closeDialog(); const p = state.puzzle;
+    if (p.mode === 'journey' && p.level < 60) loadPuzzle(A.journey(p.level + 1));
+    else if (p.mode === 'journey') showJourney(); else if (p.mode === 'daily') showDaily(); else loadPuzzle(A.free(p.size, newSeed()));
+  }
+  async function handleAction(button) {
+    const action = button.dataset.action;
+    switch (action) {
+      case 'close': closeDialog(); break;
+      case 'level': closeDialog(); loadPuzzle(A.journey(Number(button.dataset.level))); break;
+      case 'daily': closeDialog(); loadPuzzle(A.daily(A.tokyoDate(), Number(button.dataset.tier))); break;
+      case 'free': closeDialog(); loadPuzzle(A.free(Number(button.dataset.size), newSeed())); break;
+      case 'load-code': { try { const p = A.fromCode($('puzzle-code').value); closeDialog(); loadPuzzle(p); } catch (e) { toast(e.message); } break; }
+      case 'restart-confirm': restart(); break;
+      case 'cancel-search': cancelSearch(); render(); break;
+      case 'hide-hint': hintMove = null; render(); break;
+      case 'rewind-safe': rewindSafe(); break;
+      case 'result': showWin(); break;
+      case 'next': nextPuzzle(); break;
+      case 'replay': { const p = state.puzzle; closeDialog(); loadPuzzle(p, { fresh: true }); break; }
+      case 'share-result': showShare(true); break;
+      case 'copy': {
+        const text = $('share-text').value;
+        try { if (!navigator.clipboard?.writeText) throw new Error('clipboard unavailable'); await navigator.clipboard.writeText(text); toast('コピーしました。'); }
+        catch (_) { $('share-text').focus(); $('share-text').select(); toast('共有文を選択しました。ブラウザの「コピー」を使ってください。'); } break;
+      }
+      case 'native-share': {
+        if (navigator.share) try { await navigator.share({ title: 'Absolute Zero', text: $('share-text').value }); } catch (err) { if (err.name !== 'AbortError') toast('共有できませんでした。コピーを使ってください。'); }
+        else toast('この環境では共有メニューを使えません。コピーを使ってください。'); break;
+      }
+      case 'export': exportData(); break;
+      case 'import': importData(); break;
+      case 'confirm-import': {
+        if (!pendingImport) break;
+        cancelSearch(); clearTimeout(winTimer); state = null; store = pendingImport; pendingImport = null; applySettings(); persist(); closeDialog(); loadPuzzle(A.fromCode(store.current)); toast('記録を読み込みました。'); break;
+      }
+      case 'resume': showResume(); break;
+      case 'resume-code': closeDialog(); loadPuzzle(A.fromCode(button.dataset.code)); break;
+      case 'install-help': openDialog('ホーム画面から、すぐに。', '<p>iPhone：公開URLをSafariで開き、共有メニューから「ホーム画面に追加」を選んでください。</p><p>PC：対応ブラウザで公開URLを開き、アドレスバーやブラウザメニューのインストール機能を使います。</p><p>一度オンラインで読み込み、オフライン準備が完了すると、次回から通信なしでも遊べます。単体HTML版はPCのブラウザで開けますが、ホーム画面アプリのインストールとサービスワーカーは対象外です。</p><p>現在：<strong>' + (location.protocol === 'file:' ? 'ローカルファイル版' : navigator.serviceWorker?.controller ? 'オフライン用キャッシュ準備済み' : 'Web版・キャッシュ準備を確認中') + '</strong></p><button class="primary-button" data-action="close">閉じる</button>'); break;
+      case 'reset-data': openDialog('このゲームの記録を削除する？', '<p>途中盤面・クリア記録・設定を削除します。他のサイトやゲームの記録には触れません。取り消せないため、必要な記録は先に書き出してください。</p><div class="dialog-buttons"><button class="primary-button secondary-button" data-action="close">やめる</button><button class="primary-button" data-action="confirm-reset">記録を削除</button></div>'); break;
+      case 'confirm-reset': cancelSearch(); clearTimeout(winTimer); state = null; store = defaultStore(); try { localStorage.removeItem(STORAGE_KEY); } catch (_) {} applySettings(); closeDialog(); loadPuzzle(A.journey(1)); toast('このゲームの記録だけを削除しました。'); break;
+      case 'update': if (waitingWorker) { saveSession(); applyUpdate = true; waitingWorker.postMessage({ type: 'SKIP_WAITING' }); } break;
+    }
+  }
+  // Pointer and swipe input: the jump length comes from the tile, not the swipe length.
+  let gesture = null, ignoreClickUntil = 0;
+  $('board').addEventListener('pointerdown', e => {
+    const cell = e.target.closest('[data-index]');
+    if (!cell || locked || searching || e.button > 0) return;
+    gesture = { id: e.pointerId, from: Number(cell.dataset.index), x: e.clientX, y: e.clientY };
+    try { cell.setPointerCapture(e.pointerId); } catch (_) {}
+  });
+  $('board').addEventListener('pointerup', e => {
+    if (!gesture || gesture.id !== e.pointerId) return;
+    const g = gesture; gesture = null; const dx = e.clientX - g.x, dy = e.clientY - g.y;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 22) return;
+    ignoreClickUntil = Date.now() + 400;
+    if (locked || searching || !state.board[g.from]) return;
+    if (Math.min(Math.abs(dx), Math.abs(dy)) > Math.max(Math.abs(dx), Math.abs(dy)) * .8) { toast('上下左右の、いずれかにスワイプしてください。'); return; }
+    const n = state.puzzle.size, a = state.board[g.from], horizontal = Math.abs(dx) > Math.abs(dy);
+    const dr = horizontal ? 0 : Math.sign(dy), dc = horizontal ? Math.sign(dx) : 0;
+    const row = Math.floor(g.from / n) + dr * a, col = g.from % n + dc * a;
+    selected = g.from;
+    if (row < 0 || row >= n || col < 0 || col >= n || !A.destinations(state.board, n, g.from).includes(row * n + col)) { render(); toast('その方向の着地点には、駒がありません。'); return; }
+    performMove({ from: g.from, to: row * n + col });
+  });
+  $('board').addEventListener('pointercancel', () => { gesture = null; });
+  $('board').addEventListener('click', e => { if (Date.now() < ignoreClickUntil) return; const cell = e.target.closest('[data-index]'); if (cell) selectCell(Number(cell.dataset.index)); });
+  $('undo').addEventListener('click', undo); $('redo').addEventListener('click', redo); $('hint').addEventListener('click', requestHint); $('restart').addEventListener('click', confirmRestart);
+  $('help').addEventListener('click', showRules); $('settings').addEventListener('click', showSettings); $('about').addEventListener('click', showAbout);
+  $('share').addEventListener('click', () => showShare(A.count(state.board) === 0)); $('close-modal').addEventListener('click', closeDialog);
+  $('choose-puzzle').addEventListener('click', () => state.puzzle.mode === 'journey' ? showJourney() : state.puzzle.mode === 'daily' ? showDaily() : showFree());
+  $('brand').addEventListener('click', e => { e.preventDefault(); showJourney(); });
+  document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => changeMode(button.dataset.mode)));
+  document.addEventListener('click', e => { const button = e.target.closest('[data-action]'); if (button) handleAction(button).catch(err => toast(`操作を完了できませんでした：${err.message}`)); });
+  $('modal').addEventListener('close', () => { lastTick = Date.now(); if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true }); });
+  $('modal').addEventListener('change', e => { const key = e.target.dataset.setting; if (key && Object.hasOwn(store.settings, key)) { store.settings[key] = e.target.checked; applySettings(); persist(); if (key === 'sound' && e.target.checked) sound('move', 2); } });
+  document.addEventListener('keydown', e => {
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) { if (e.key === 'Enter' && e.target.id === 'puzzle-code') { e.preventDefault(); const btn = document.querySelector('[data-action="load-code"]'); if (btn) handleAction(btn); } return; }
+    if ($('modal').open) return;
+    if (locked) return;
+    if (e.key === 'Escape') { selected = -1; hintMove = null; cancelSearch(); render(); return; }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); if (e.shiftKey) redo(); else undo(); return; }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key.toLowerCase() === 'u') { e.preventDefault(); undo(); }
+    if (e.key.toLowerCase() === 'h') { e.preventDefault(); requestHint(); }
+    if (selected >= 0 && ['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft'].includes(e.key)) {
+      e.preventDefault(); const [dr, dc] = A.DIRS[['ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft'].indexOf(e.key)], n = state.puzzle.size, a = state.board[selected];
+      const r = Math.floor(selected / n) + dr * a, c = selected % n + dc * a;
+      if (r >= 0 && r < n && c >= 0 && c < n && A.destinations(state.board, n, selected).includes(r * n + c)) performMove({ from: selected, to: r * n + c }); else toast('その方向に着地できる駒はありません。');
+    }
+  });
+  function tick() {
+    const now = Date.now(), delta = Math.max(0, Math.min(2000, now - lastTick)); lastTick = now;
+    if (state && !document.hidden && !$('modal').open && A.status(state.board, state.puzzle.size) === 'playing') state.stats.elapsed += delta;
+    if (now - lastSaveTick > 10000) { lastSaveTick = now; saveSession(); }
+  }
+  setInterval(tick, 1000);
+  document.addEventListener('visibilitychange', () => { tick(); lastTick = Date.now(); saveSession(); });
+  window.addEventListener('pagehide', () => { tick(); saveSession(); });
+  applySettings();
+  let puzzle;
+  try { const code = new URLSearchParams(location.search).get('p'); puzzle = A.fromCode(code || store.current); }
+  catch (_) { puzzle = A.journey(1); setTimeout(() => toast('問題コードを読み込めなかったため、航路01を開きました。'), 200); }
+  loadPuzzle(puzzle);
+  if (isHttp && 'serviceWorker' in navigator && !window.AZ_STANDALONE) {
+    navigator.serviceWorker.register('./sw.js', { scope: './' }).then(reg => {
+      if (reg.waiting) waitingWorker = reg.waiting;
+      reg.addEventListener('updatefound', () => { const w = reg.installing; if (!w) return; w.addEventListener('statechange', () => { if (w.state === 'installed' && navigator.serviceWorker.controller) { waitingWorker = w; toast('新しい版があります。設定から、記録を保存して更新できます。'); } }); });
+    }).catch(() => { $('save-status').textContent = '自動保存・オフライン準備不可'; });
+    navigator.serviceWorker.addEventListener('controllerchange', () => { if (applyUpdate) location.reload(); });
+  }
+  // Read-only diagnostics. No automatic play, mutation, secrets or network access.
+  window.AbsoluteZero = Object.freeze({ version: '1.0.0', snapshot: () => JSON.parse(JSON.stringify({ code: state.puzzle.code, size: state.puzzle.size, board: state.board, history: state.history, redo: state.redo, stats: state.stats, status: A.status(state.board, state.puzzle.size), searching, hintMove, awarded: state.awarded })) });
+})();
+
+</script>
+</body>
+</html>

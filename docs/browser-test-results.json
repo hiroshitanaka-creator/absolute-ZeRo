@@ -1,0 +1,94 @@
+{
+  "browser": "144.0.7559.96",
+  "method": "Headless Chromium, local HTML injection, in-memory Storage fixture; no external navigation.",
+  "elapsedSeconds": 35.16,
+  "results": [
+    {
+      "test": "UI-01 initial board and first actionable screen",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-02 exact legal destination and result preview",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-03 win, stars and result panel",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-04 undo and redo restore exact state",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-05 difference merge and keyboard movement",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-06 immobile 5 stays immobile but accepts a 4",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-07 real touch-event swipe and jumping over an intervening piece",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-08 certified hint and validated save/restore round trip",
+      "status": "PASS",
+      "details": "Storage test double"
+    },
+    {
+      "test": "UI-09 off-certificate hint solved inside a real Blob Worker",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-10 exhaustive dead-end notice and safe certified rewind",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-11 daily, free play, mode navigation and shared puzzle codes",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-12 modal input boundary and explicit restart confirmation",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-13 theme switch and spoiler-free code sharing",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "test": "UI-14 full rendered integration walkthrough of every journey level",
+      "status": "PASS",
+      "details": "60 boards, 937 certified moves"
+    },
+    {
+      "test": "UI-15 responsive 7x7 board and primary controls",
+      "status": "PASS",
+      "details": "320 / 360 / 390 / 430 / 768 / 1440 px; no horizontal overflow"
+    },
+    {
+      "test": "UI-16 browser console and screenshot review",
+      "status": "PASS",
+      "details": "zero uncaught page errors"
+    }
+  ],
+  "uncaughtErrors": [],
+  "notVerified": [
+    "physical iPhone / Mobile Safari",
+    "native browser persistence across restart",
+    "HTTPS PWA installation and native service worker offline fetch",
+    "actual GitHub Pages deployment"
+  ]
+}

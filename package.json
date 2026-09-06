@@ -1,0 +1,20 @@
+{
+  "name": "absolute-zero-puzzle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "数字の距離だけ跳び、差でほどく、ゼロを目指す思考パズル。",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/core.test.cjs",
+    "build": "node tools/build.mjs",
+    "serve": "node tools/serve.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "homepage": "https://hiroshitanaka-creator.github.io/absolute-ZeRo/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hiroshitanaka-creator/absolute-ZeRo.git"
+  }
+}

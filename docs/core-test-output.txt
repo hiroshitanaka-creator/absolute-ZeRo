@@ -1,0 +1,176 @@
+
+> absolute-zero-puzzle@1.0.0 test
+> node --test tests/core.test.cjs
+
+TAP version 13
+# Subtest: 01 board validation rejects dimensions, non-integers and out-of-range values
+ok 1 - 01 board validation rejects dimensions, non-integers and out-of-range values
+  ---
+  duration_ms: 6.906636
+  type: 'test'
+  ...
+# Subtest: 02 an exact-distance cardinal jump lands on an occupied cell
+ok 2 - 02 an exact-distance cardinal jump lands on an occupied cell
+  ---
+  duration_ms: 1.573991
+  type: 'test'
+  ...
+# Subtest: 03 intervening pieces do not block a jump
+ok 3 - 03 intervening pieces do not block a jump
+  ---
+  duration_ms: 0.440575
+  type: 'test'
+  ...
+# Subtest: 04 diagonal, short, empty, same-cell and out-of-range moves are rejected
+ok 4 - 04 diagonal, short, empty, same-cell and out-of-range moves are rejected
+  ---
+  duration_ms: 0.474445
+  type: 'test'
+  ...
+# Subtest: 05 horizontal moves never wrap into the next row
+ok 5 - 05 horizontal moves never wrap into the next row
+  ---
+  duration_ms: 0.185286
+  type: 'test'
+  ...
+# Subtest: 06 merge leaves the absolute difference at the destination without mutating input
+ok 6 - 06 merge leaves the absolute difference at the destination without mutating input
+  ---
+  duration_ms: 0.208321
+  type: 'test'
+  ...
+# Subtest: 07 equal values disappear; an empty board wins before checking legal moves
+ok 7 - 07 equal values disappear; an empty board wins before checking legal moves
+  ---
+  duration_ms: 0.330666
+  type: 'test'
+  ...
+# Subtest: 08 nonempty boards with no legal moves are stuck, including a single tile
+ok 8 - 08 nonempty boards with no legal moves are stuck, including a single tile
+  ---
+  duration_ms: 0.251136
+  type: 'test'
+  ...
+# Subtest: 09 large values cannot move themselves but can receive a moving tile
+ok 9 - 09 large values cannot move themselves but can receive a moving tile
+  ---
+  duration_ms: 5.82696
+  type: 'test'
+  ...
+# Subtest: 10 certificates for all 60 journey levels end at zero
+ok 10 - 10 certificates for all 60 journey levels end at zero
+  ---
+  duration_ms: 69.739446
+  type: 'test'
+  ...
+# Subtest: 11 1200 free-play boards have valid certificates and deterministic codes
+ok 11 - 11 1200 free-play boards have valid certificates and deterministic codes
+  ---
+  duration_ms: 380.11703
+  type: 'test'
+  ...
+# Subtest: 12 1098 daily boards cover every day of a leap year at all three tiers
+ok 12 - 12 1098 daily boards cover every day of a leap year at all three tiers
+  ---
+  duration_ms: 506.732559
+  type: 'test'
+  ...
+# Subtest: 13 same seed generates identical boards and certified move sequences
+ok 13 - 13 same seed generates identical boards and certified move sequences
+  ---
+  duration_ms: 8.687033
+  type: 'test'
+  ...
+# Subtest: 14 invalid seeds, codes, sizes, levels and impossible date strings are rejected
+ok 14 - 14 invalid seeds, codes, sizes, levels and impossible date strings are rejected
+  ---
+  duration_ms: 0.672201
+  type: 'test'
+  ...
+# Subtest: 15 JST daily rollover is deterministic and independent of host timezone
+ok 15 - 15 JST daily rollover is deterministic and independent of host timezone
+  ---
+  duration_ms: 0.197104
+  type: 'test'
+  ...
+# Subtest: 16 each certified intermediate position has a complete verified suffix
+ok 16 - 16 each certified intermediate position has a complete verified suffix
+  ---
+  duration_ms: 1.115107
+  type: 'test'
+  ...
+# Subtest: 17 solver finds a valid route for all first ten levels, without certificates
+ok 17 - 17 solver finds a valid route for all first ten levels, without certificates
+  ---
+  duration_ms: 3.985231
+  type: 'test'
+  ...
+# Subtest: 18 solver reports exhaustive impossibility and odd-sum obstruction
+ok 18 - 18 solver reports exhaustive impossibility and odd-sum obstruction
+  ---
+  duration_ms: 0.165406
+  type: 'test'
+  ...
+# Subtest: 19 budget exhaustion is UNKNOWN, never called unsolvable
+ok 19 - 19 budget exhaustion is UNKNOWN, never called unsolvable
+  ---
+  duration_ms: 0.191103
+  type: 'test'
+  ...
+# Subtest: 20 a verified certificate still works under a zero search budget
+ok 20 - 20 a verified certificate still works under a zero search budget
+  ---
+  duration_ms: 0.997654
+  type: 'test'
+  ...
+# Subtest: 21 an invalid supplied certificate is not trusted
+ok 21 - 21 an invalid supplied certificate is not trusted
+  ---
+  duration_ms: 0.144738
+  type: 'test'
+  ...
+# Subtest: 22 bounded solver agrees with an independent exhaustive oracle on 120 small boards
+ok 22 - 22 bounded solver agrees with an independent exhaustive oracle on 120 small boards
+  ---
+  duration_ms: 40.389739
+  type: 'test'
+  ...
+# Subtest: 23 restore reconstructs board from validated history and validates redo
+ok 23 - 23 restore reconstructs board from validated history and validates redo
+  ---
+  duration_ms: 0.612232
+  type: 'test'
+  ...
+# Subtest: 24 corrupt histories, invalid counters and wrong versions cannot be restored
+ok 24 - 24 corrupt histories, invalid counters and wrong versions cannot be restored
+  ---
+  duration_ms: 0.268084
+  type: 'test'
+  ...
+# Subtest: 25 service worker installation, scope-limited cleanup and explicit update lifecycle
+ok 25 - 25 service worker installation, scope-limited cleanup and explicit update lifecycle
+  ---
+  duration_ms: 4.59088
+  type: 'test'
+  ...
+# Subtest: 26 offline navigation returns cached index; external requests are not intercepted
+ok 26 - 26 offline navigation returns cached index; external requests are not intercepted
+  ---
+  duration_ms: 1.693717
+  type: 'test'
+  ...
+# Subtest: 27 site packaging is relative-path only and contains no runtime dependency URLs
+ok 27 - 27 site packaging is relative-path only and contains no runtime dependency URLs
+  ---
+  duration_ms: 0.534212
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1285.095055
