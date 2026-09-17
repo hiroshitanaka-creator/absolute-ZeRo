@@ -1,6 +1,6 @@
 {
   "name": "absolute-zero-puzzle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "数字の距離だけ跳び、差でほどく、ゼロを目指す思考パズル。",
   "license": "MIT",

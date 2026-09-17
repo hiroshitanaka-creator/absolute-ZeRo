@@ -7,15 +7,25 @@
 
 **5×5〜7×7 / 数字1〜9 / 60の航路 / 毎日の問題 / 自由演習 / ローカル保存 / MIT**
 
-![Absolute Zero の実装画面](docs/screenshots/desktop.png)
+![Absolute Zero v1.0.0 の実装画面](docs/screenshots/desktop.png)
+
+上の画像は旧版v1.0.0の画面です。v1.0.1では下記の明るい配色へ変更しています。
 
 **[▶ ブラウザで遊ぶ](https://hiroshitanaka-creator.github.io/absolute-ZeRo/)** · [ルール](#ルール) · [開発とテスト](#開発とテスト) · [MIT License](LICENSE)
 
 [![テストと公開](https://github.com/hiroshitanaka-creator/absolute-ZeRo/actions/workflows/pages.yml/badge.svg)](https://github.com/hiroshitanaka-creator/absolute-ZeRo/actions/workflows/pages.yml)
 
-バージョン **1.0.0**。インストール・アカウント・APIキー不要。ブラウザで、次の一手を考えるパズルです。
+バージョン **1.0.1**。インストール・アカウント・APIキー不要。ブラウザで、次の一手を考えるパズルです。
 
 > 初回公開には、管理者による Settings → Pages → Source → GitHub Actions の選択が必要です。未設定の間はプレイ用リンクが404になります。
+
+## v1.0.1 の配色更新
+
+背景をクールホワイト、盤面を淡いブルーへ変更し、数字の駒をミント・スカイブルー・イエローなどのパステルカラーに揃えました。選択中は青い枠、着地先は緑の枠と結果表示で区別します。ダークモードも青系に統一しています。
+
+[今回の変更と検証範囲](docs/PALETTE_UPDATE_v1.0.1.md)。
+
+PWAの旧版を開いている場合は、設定に「新しい版を適用して再読み込み」が表示されたら押してください。途中盤面とクリア記録の保存形式は変更していません。
 
 ## すぐに遊ぶ
 
