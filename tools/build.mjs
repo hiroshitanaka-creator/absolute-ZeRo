@@ -14,9 +14,10 @@ html = html.replace('<!doctype html>', '<!doctype html>\n<!--\n' + license + '\n
 const css = await readFile(path.join(root, 'styles.css'), 'utf8');
 const core = await readFile(path.join(root, 'core.js'), 'utf8');
 const app = await readFile(path.join(root, 'app.js'), 'utf8');
-const svg = await readFile(path.join(root, 'icons/icon.svg'), 'utf8');
+const faviconPath = html.match(/<link rel="icon" href="([^"]+)"/)[1];
+const favicon = (await readFile(path.join(root, faviconPath))).toString('base64');
 html = html.replace(/<link rel="apple-touch-icon"[^>]+>/, '').replace(/<link rel="manifest"[^>]+>/, '');
-html = html.replace(/<link rel="icon"[^>]+>/, `<link rel="icon" href="data:image/svg+xml,${encodeURIComponent(svg)}">`);
+html = html.replace(/<link rel="icon"[^>]+>/, `<link rel="icon" href="data:image/png;base64,${favicon}" type="image/png" sizes="32x32">`);
 html = html.replace('<link rel="stylesheet" href="styles.css">', `<style>${css}</style>`);
 html = html.replace('  <script src="core.js" defer></script>\n  <script src="app.js" defer></script>', '');
 const escapeScript = s => s.replace(/<\/script/gi, '<\\/script');

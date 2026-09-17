@@ -15,9 +15,17 @@
 
 [![テストと公開](https://github.com/hiroshitanaka-creator/absolute-ZeRo/actions/workflows/pages.yml/badge.svg)](https://github.com/hiroshitanaka-creator/absolute-ZeRo/actions/workflows/pages.yml)
 
-バージョン **1.0.4**。インストール・アカウント・APIキー不要。ブラウザで、次の一手を考えるパズルです。
+バージョン **1.0.5**。インストール・アカウント・APIキー不要。ブラウザで、次の一手を考えるパズルです。
 
 > 初回公開には、管理者による Settings → Pages → Source → GitHub Actions の選択が必要です。未設定の間はプレイ用リンクが404になります。
+
+## v1.0.5 のホーム画面アイコン
+
+![新しいAbsolute Zeroのアイコン](icons/apple-touch-icon-v1.0.5.png)
+
+鮮やかなブルーに、白とミントの立体的なゼロを合わせました。iPhone用180px、PWA用192px・512px、ブラウザ用32pxを同じデザインに統一しています。背景は不透明で、端末側の角丸・円形マスクに対応する余白を確保しました。
+
+古いアイコンのキャッシュを避けるため、参照する画像ファイル名も更新しています。Safariで公開ページを再読み込みしてから、「共有 → ホーム画面に追加」で追加できます。単体HTML版にも新しいブラウザアイコンを埋め込んでいます。
 
 ## v1.0.4 の配色更新
 
