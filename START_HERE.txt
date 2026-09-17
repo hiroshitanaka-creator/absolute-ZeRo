@@ -1,4 +1,4 @@
-Absolute Zero 1.0.2
+Absolute Zero 1.0.3
 
 パソコンですぐ遊ぶ：
   Absolute-Zero-standalone.html をブラウザで開いてください。

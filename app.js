@@ -1,4 +1,4 @@
-/* Absolute Zero v1.0.2 — MIT. UI, input and local-only persistence. */
+/* Absolute Zero v1.0.3 — MIT. UI, input and local-only persistence. */
 (() => {
   'use strict';
   const A = window.AZ, $ = id => document.getElementById(id);
@@ -271,7 +271,7 @@
     openDialog('考えかけの、続きを。', `<p class="dialog-intro">直近20件のうち、未クリアの盤面です。</p>${sessions.map(s => `<button class="primary-button secondary-button" style="margin:8px 0" data-action="resume-code" data-code="${esc(s.code)}">${esc(s.code)} · ${s.history.length}手目${icon('arrow')}</button>`).join('') || '<p>保存中の問題はありません。</p>'}`);
   }
   function showAbout() {
-    openDialog('Absolute Zero', '<p>数字と同じ距離を跳び、引き算の絶対値で駒を重ねるロジックパズル。提示されたゲームルールをもとに、新規に実装したバージョン1.0.2です。</p><p><strong>実装・配布：MIT License</strong><br>Copyright (c) 2026 Absolute Zero contributors<br>第三者製のゲームコード・画像・音楽・フォントは同梱していません。効果音はブラウザ内で合成します。</p><p>市場での唯一性、商標の使用可能性、第三者権利の不存在は保証していません。タイトルを含む独自性の調査は別途必要です。</p><p>通常問題60面、デイリー3段階、自由演習。生成問題には、初期盤面を全消しできる検証済みの手順を付けています。すべての合法手が正解につながるわけではありません。</p><p style="font-size:11px">コード体系 AZ1 / 日本時間 UTC+9 / ローカル保存のみ</p><button class="primary-button" data-action="close">盤面へ戻る</button>');
+    openDialog('Absolute Zero', '<p>数字と同じ距離を跳び、引き算の絶対値で駒を重ねるロジックパズル。提示されたゲームルールをもとに、新規に実装したバージョン1.0.3です。</p><p><strong>実装・配布：MIT License</strong><br>Copyright (c) 2026 Absolute Zero contributors<br>第三者製のゲームコード・画像・音楽・フォントは同梱していません。効果音はブラウザ内で合成します。</p><p>市場での唯一性、商標の使用可能性、第三者権利の不存在は保証していません。タイトルを含む独自性の調査は別途必要です。</p><p>通常問題60面、デイリー3段階、自由演習。生成問題には、初期盤面を全消しできる検証済みの手順を付けています。すべての合法手が正解につながるわけではありません。</p><p style="font-size:11px">コード体系 AZ1 / 日本時間 UTC+9 / ローカル保存のみ</p><button class="primary-button" data-action="close">盤面へ戻る</button>');
   }
   function shareText(result = false) {
     const p = state.puzzle; let text = `ABSOLUTE ZERO\n${p.label}\n`;
@@ -418,5 +418,5 @@
     navigator.serviceWorker.addEventListener('controllerchange', () => { if (applyUpdate) location.reload(); });
   }
   // Read-only diagnostics. No automatic play, mutation, secrets or network access.
-  window.AbsoluteZero = Object.freeze({ version: '1.0.2', snapshot: () => JSON.parse(JSON.stringify({ code: state.puzzle.code, size: state.puzzle.size, board: state.board, history: state.history, redo: state.redo, stats: state.stats, status: A.status(state.board, state.puzzle.size), searching, hintMove, awarded: state.awarded })) });
+  window.AbsoluteZero = Object.freeze({ version: '1.0.3', snapshot: () => JSON.parse(JSON.stringify({ code: state.puzzle.code, size: state.puzzle.size, board: state.board, history: state.history, redo: state.redo, stats: state.stats, status: A.status(state.board, state.puzzle.size), searching, hintMove, awarded: state.awarded })) });
 })();

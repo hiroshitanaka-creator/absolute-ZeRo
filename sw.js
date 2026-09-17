@@ -1,11 +1,12 @@
 /* Absolute Zero scoped offline cache. Never delete caches belonging to other games. */
 'use strict';
 const PREFIX = `absolute-zero:${self.registration.scope}:`;
-const CACHE = `${PREFIX}1.0.2`;
+const CACHE = `${PREFIX}1.0.3`;
 const ROOT = self.registration.scope;
 const ASSETS = ['./', 'index.html', 'styles.css', 'core.js', 'app.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'].map(p => new URL(p, ROOT).href);
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));
+  // Re-fetch each asset so the browser HTTP cache cannot populate a new release with old files.
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS.map(url => new Request(url, { cache: 'reload' })))));
   // Updates wait for explicit user action; a game in progress is not reloaded.
 });
 self.addEventListener('activate', event => {
