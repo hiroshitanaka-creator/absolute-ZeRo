@@ -1,7 +1,7 @@
 /* Absolute Zero scoped offline cache. Never delete caches belonging to other games. */
 'use strict';
 const PREFIX = `absolute-zero:${self.registration.scope}:`;
-const CACHE = `${PREFIX}1.0.3`;
+const CACHE = `${PREFIX}1.0.4`;
 const ROOT = self.registration.scope;
 const ASSETS = ['./', 'index.html', 'styles.css', 'core.js', 'app.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'].map(p => new URL(p, ROOT).href);
 self.addEventListener('install', event => {

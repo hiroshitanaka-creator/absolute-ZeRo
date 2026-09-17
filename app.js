@@ -1,4 +1,4 @@
-/* Absolute Zero v1.0.3 — MIT. UI, input and local-only persistence. */
+/* Absolute Zero v1.0.4 — MIT. UI, input and local-only persistence. */
 (() => {
   'use strict';
   const A = window.AZ, $ = id => document.getElementById(id);
@@ -93,14 +93,16 @@
     const lastMove = history[history.length - 1];
     cells.forEach((cell, i) => {
       const value = b[i], dest = value ? A.destinations(b, n, i) : [];
-      cell.className = `cell ${value ? 'tile' : 'empty'}`;
+      cell.classList.toggle('tile', value > 0); cell.classList.toggle('empty', !value);
       cell.classList.toggle('selected', i === selected); cell.classList.toggle('landing', targets.includes(i));
       cell.classList.toggle('anchored', value > 0 && value >= n); cell.classList.toggle('flight-path', path.has(i) && !value);
       cell.classList.toggle('hint-source', !!hintMove && hintMove.from === i); cell.classList.toggle('hint-target', !!hintMove && hintMove.to === i);
       cell.classList.toggle('last-destination', !!lastMove && lastMove.to === i);
       cell.dataset.value = value; cell.dataset.result = targets.includes(i) ? `→${Math.abs(b[selected] - value)}` : '';
-      cell.children[0].textContent = value || '';
-      cell.children[1].textContent = !value ? '' : value >= n ? '受け' : dest.length ? dest.map(to => Math.floor(to / n) < Math.floor(i / n) ? '↑' : Math.floor(to / n) > Math.floor(i / n) ? '↓' : to > i ? '→' : '←').join('') : '·';
+      const valueText = value ? String(value) : '';
+      if (cell.children[0].textContent !== valueText) cell.children[0].textContent = valueText;
+      const markText = !value ? '' : value >= n ? '受け' : dest.length ? dest.map(to => Math.floor(to / n) < Math.floor(i / n) ? '↑' : Math.floor(to / n) > Math.floor(i / n) ? '↓' : to > i ? '→' : '←').join('') : '·';
+      if (cell.children[1].textContent !== markText) cell.children[1].textContent = markText;
       cell.setAttribute('aria-label', `${coord(i, n)}、${value ? `数字${value}、${dest.length ? `${dest.length}方向に移動可能` : '現在は移動先なし'}` : '空きマス'}${targets.includes(i) ? `、着地すると${Math.abs(b[selected] - value)}` : ''}`);
       cell.setAttribute('aria-pressed', String(i === selected)); cell.tabIndex = value ? 0 : -1;
     });
@@ -271,7 +273,7 @@
     openDialog('考えかけの、続きを。', `<p class="dialog-intro">直近20件のうち、未クリアの盤面です。</p>${sessions.map(s => `<button class="primary-button secondary-button" style="margin:8px 0" data-action="resume-code" data-code="${esc(s.code)}">${esc(s.code)} · ${s.history.length}手目${icon('arrow')}</button>`).join('') || '<p>保存中の問題はありません。</p>'}`);
   }
   function showAbout() {
-    openDialog('Absolute Zero', '<p>数字と同じ距離を跳び、引き算の絶対値で駒を重ねるロジックパズル。提示されたゲームルールをもとに、新規に実装したバージョン1.0.3です。</p><p><strong>実装・配布：MIT License</strong><br>Copyright (c) 2026 Absolute Zero contributors<br>第三者製のゲームコード・画像・音楽・フォントは同梱していません。効果音はブラウザ内で合成します。</p><p>市場での唯一性、商標の使用可能性、第三者権利の不存在は保証していません。タイトルを含む独自性の調査は別途必要です。</p><p>通常問題60面、デイリー3段階、自由演習。生成問題には、初期盤面を全消しできる検証済みの手順を付けています。すべての合法手が正解につながるわけではありません。</p><p style="font-size:11px">コード体系 AZ1 / 日本時間 UTC+9 / ローカル保存のみ</p><button class="primary-button" data-action="close">盤面へ戻る</button>');
+    openDialog('Absolute Zero', '<p>数字と同じ距離を跳び、引き算の絶対値で駒を重ねるロジックパズル。提示されたゲームルールをもとに、新規に実装したバージョン1.0.4です。</p><p><strong>実装・配布：MIT License</strong><br>Copyright (c) 2026 Absolute Zero contributors<br>第三者製のゲームコード・画像・音楽・フォントは同梱していません。効果音はブラウザ内で合成します。</p><p>市場での唯一性、商標の使用可能性、第三者権利の不存在は保証していません。タイトルを含む独自性の調査は別途必要です。</p><p>通常問題60面、デイリー3段階、自由演習。生成問題には、初期盤面を全消しできる検証済みの手順を付けています。すべての合法手が正解につながるわけではありません。</p><p style="font-size:11px">コード体系 AZ1 / 日本時間 UTC+9 / ローカル保存のみ</p><button class="primary-button" data-action="close">盤面へ戻る</button>');
   }
   function shareText(result = false) {
     const p = state.puzzle; let text = `ABSOLUTE ZERO\n${p.label}\n`;
@@ -418,5 +420,5 @@
     navigator.serviceWorker.addEventListener('controllerchange', () => { if (applyUpdate) location.reload(); });
   }
   // Read-only diagnostics. No automatic play, mutation, secrets or network access.
-  window.AbsoluteZero = Object.freeze({ version: '1.0.3', snapshot: () => JSON.parse(JSON.stringify({ code: state.puzzle.code, size: state.puzzle.size, board: state.board, history: state.history, redo: state.redo, stats: state.stats, status: A.status(state.board, state.puzzle.size), searching, hintMove, awarded: state.awarded })) });
+  window.AbsoluteZero = Object.freeze({ version: '1.0.4', snapshot: () => JSON.parse(JSON.stringify({ code: state.puzzle.code, size: state.puzzle.size, board: state.board, history: state.history, redo: state.redo, stats: state.stats, status: A.status(state.board, state.puzzle.size), searching, hintMove, awarded: state.awarded })) });
 })();
