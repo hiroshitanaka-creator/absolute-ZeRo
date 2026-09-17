@@ -9,17 +9,17 @@
 
 ![Absolute Zero v1.0.0 の実装画面](docs/screenshots/desktop.png)
 
-上の画像は旧版v1.0.0の画面です。v1.0.1では下記の明るい配色へ変更しています。
+上の画像は旧版v1.0.0の画面です。v1.0.2では下記の明るい配色へ変更しています。
 
 **[▶ ブラウザで遊ぶ](https://hiroshitanaka-creator.github.io/absolute-ZeRo/)** · [ルール](#ルール) · [開発とテスト](#開発とテスト) · [MIT License](LICENSE)
 
 [![テストと公開](https://github.com/hiroshitanaka-creator/absolute-ZeRo/actions/workflows/pages.yml/badge.svg)](https://github.com/hiroshitanaka-creator/absolute-ZeRo/actions/workflows/pages.yml)
 
-バージョン **1.0.1**。インストール・アカウント・APIキー不要。ブラウザで、次の一手を考えるパズルです。
+バージョン **1.0.2**。インストール・アカウント・APIキー不要。ブラウザで、次の一手を考えるパズルです。
 
 > 初回公開には、管理者による Settings → Pages → Source → GitHub Actions の選択が必要です。未設定の間はプレイ用リンクが404になります。
 
-## v1.0.1 の配色更新
+## v1.0.2 の配色更新
 
 背景をクールホワイト、盤面を淡いブルーへ変更し、数字の駒をミント・スカイブルー・イエローなどのパステルカラーに揃えました。選択中は青い枠、着地先は緑の枠と結果表示で区別します。ダークモードも青系に統一しています。
 

@@ -120,12 +120,12 @@ test('24 corrupt histories, invalid counters and wrong versions cannot be restor
 test('25 service worker installation, scope-limited cleanup and explicit update lifecycle', async () => {
   const listeners = {}, deleted = [], cached = []; let skipped = 0, claimed = 0;
   const scope = 'https://example.test/absolute-zero/';
-  const ctx = { URL, console, self: { registration: { scope }, location: { origin: 'https://example.test' }, addEventListener: (type, handler) => { listeners[type] = handler; }, clients: { claim: () => { claimed++; return Promise.resolve(); } }, skipWaiting: () => skipped++ }, caches: { open: async () => ({ addAll: async files => cached.push(...files) }), keys: async () => [`absolute-zero:${scope}:0.9.0`, `absolute-zero:${scope}:1.0.0`, `absolute-zero:${scope}:1.0.1`, 'other-game:1.0', 'absolute-zero:https://example.test/elsewhere/:0.9'], delete: async k => { deleted.push(k); return true; } } };
+  const ctx = { URL, console, self: { registration: { scope }, location: { origin: 'https://example.test' }, addEventListener: (type, handler) => { listeners[type] = handler; }, clients: { claim: () => { claimed++; return Promise.resolve(); } }, skipWaiting: () => skipped++ }, caches: { open: async () => ({ addAll: async files => cached.push(...files) }), keys: async () => [`absolute-zero:${scope}:0.9.0`, `absolute-zero:${scope}:1.0.0`, `absolute-zero:${scope}:1.0.1`, `absolute-zero:${scope}:1.0.2`, 'other-game:1.0', 'absolute-zero:https://example.test/elsewhere/:0.9'], delete: async k => { deleted.push(k); return true; } } };
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../sw.js'), 'utf8'), ctx);
   let promise; listeners.install({ waitUntil: p => { promise = p; } }); await promise;
   assert.ok(cached.every(u => u.startsWith(scope))); assert.ok(cached.includes(scope + 'core.js')); assert.equal(skipped, 0);
   listeners.activate({ waitUntil: p => { promise = p; } }); await promise;
-  assert.deepEqual(deleted, [`absolute-zero:${scope}:0.9.0`, `absolute-zero:${scope}:1.0.0`]); assert.equal(claimed, 1);
+  assert.deepEqual(deleted, [`absolute-zero:${scope}:0.9.0`, `absolute-zero:${scope}:1.0.0`, `absolute-zero:${scope}:1.0.1`]); assert.equal(claimed, 1);
   listeners.message({ data: { type: 'SKIP_WAITING' } }); assert.equal(skipped, 1);
 });
 test('26 offline navigation returns cached index; external requests are not intercepted', async () => {
